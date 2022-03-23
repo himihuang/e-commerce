@@ -1,0 +1,103 @@
+.switch
+  position: relative
+  width: $width*8
+  height: $width*4
+
+  .controler
+    display: block
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    border-radius: $width*5
+    background-color: $color-gray-500
+    border: 1px solid $color-primary--text
+    cursor: pointer
+    transition: all 1s
+    &:before
+      content: ''
+      display: block
+      width: $width*3
+      height: $width*3
+      border-radius: 50%
+      background-color: $color-gray-200
+      position: absolute
+      top: 50%
+      right: $width/2
+      transform: translateY(-50%)
+      transition: all 1s
+
+
+  input[type="checkbox"]:checked ~ .controler
+    background-color: $color-secondary--300
+    border: 1px solid $color-primary--border
+    &:before
+      background-color: $color-primary--text
+      right: $width*4
+  input[type="checkbox"]
+    display: none
+
+
+
+.btn-icon
+    width: $width*5
+    height: $width*5
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: $width/2
+    font-size: $width*3
+
+.btn-edit
+    background-color: $color-primary--border
+    color: $color-primary--text
+    border: 1px solid $color-primary--text
+.btn-delete
+    color: $color-gray-200
+    background-color:  $color-gray-500
+    border: 1px solid $color-gray-200
+
+.isEnabled
+    background-color: $color-primary--border
+    padding: $width
+    width: 50%
+    text-align: center
+    border-radius: 50px
+.isNotEnabled
+    background-color: $color-gray-400
+    padding: $width
+    width: 50%
+    text-align: center
+    border-radius: 50px
+
+table
+    width: 100%
+    thead
+        background-color: $color-primary--border
+        tr
+            border: 1px solid $color-primary--text
+    tbody
+        tr
+            border: 1px solid $color-gray-300
+    tr
+        display: flex
+        flex-direction: row
+        padding: $width*3
+
+    td
+        display: flex
+        align-items: center
+
+
+    .img-wrap
+        width: 80px
+        height: 90px
+        position: relative
+        overflow: hidden
+        img
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+            width: 100%

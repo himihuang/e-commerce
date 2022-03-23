@@ -1,30 +1,30 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <router-view />
 </template>
+<script>
+export default {};
+</script>
+<style lang="sass">
+@import "bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap');
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+$width: 8px
 
-#nav {
-  padding: 30px;
+$color--white: #fff
+$color-primary--text: #897B62
+$color-primary: #B8AC97
+$color-secondary: #FEFBF5
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+
+
+ul
+  list-style: none
+  padding-left: 0
+
+a
+ text-decoration: none
+ color: $color-primary--text
+ &:hover
+   color: $color-primary--text
 </style>

@@ -1,0 +1,139 @@
+// -----**btn**------//
+.btn-line
+  color: $color-primary--text
+  &:before
+    background-color: $color-primary--text
+  &:hover
+    color: $color--white
+
+.btn-primary--fill
+  background-color: $color-primary--text
+  color: $color--white
+  border-radius: 0
+  position: relative
+  span
+    color: $color--white
+    z-index: 1
+    position: relative
+  &:before
+    content: ''
+    display: block
+    height: 100%
+    width: 0%
+    position: absolute
+    top: 0
+    left: 0
+    background-color: #968c79
+    z-index: 0
+    transition: all 1s
+  &:after
+    content: ''
+    display: block
+    height: 100%
+    width: 0%
+    position: absolute
+    top: 0
+    left: 0
+    background-color:#b1aba1
+    z-index: 0
+    transition: all 1.5s
+  &:hover
+    &:after
+      width: 100%
+    &:before
+      width: 100%
+
+.btn-primary--border
+  border-radius: 0
+  color: $color-primary--text
+  border-bottom: 2px solid $color-primary--text
+  position: relative
+  z-index: 1
+  transition: all .5s
+  &:before
+    content: ''
+    display: block
+    width: 100%
+    height: 0
+    position: absolute
+    left: 0
+    bottom: 0
+    background-color: $color-primary--text
+    z-index: -1
+    transition: all .5s
+  &:hover
+    color: $color--white
+    &:before
+      height: 100%
+    
+
+.btn-secondary--border
+  border-radius: 0
+  color: $color-primary--text
+  border: 2px solid $color-primary--text
+  transition: all .5s
+  &:hover
+    background-color: $color-primary--text
+    color: $color--white
+
+.btn-text
+  padding-right: $width*10
+  position: relative
+  color: $color--white
+
+  &:before
+    content: ''
+    display: block
+    width: $width*0
+    height: $width*0
+    border: 1px solid $color--white
+    border-radius: 50%
+    position: absolute
+    top: 50%
+    left: 20%
+    transform: translateY(-50%) rotate(0deg)
+    transition: all.5s
+  &:after
+   content: ''
+   display: block
+   width: $width*9
+   height: $width/4
+   background-color: $color--white
+   position: absolute
+   top: 50%
+   right: 0
+
+.btn.w-30
+  width: 30%
+
+// -----**product-card**------//
+.product-card
+  
+  .btn-line
+    color: $color--white
+    text-align: center
+    padding-top: $width
+    padding-bottom: $width
+    position: relative
+    transition: all 1s ease
+    color: $color--white
+    border-top: 1px solid $color--white
+    border-bottom: 1px solid $color--white
+    border-radius: 0
+    z-index: 1
+    &:before
+      content: ''
+      display: block
+      position: absolute
+      bottom: 0
+      left: 0
+      width: 100%
+      height: 0
+      background-color: $color--white
+      z-index: -1
+      transition: all 1s ease
+    &:hover
+      color: $color-primary--text
+      &::before
+        height: 100%
+  

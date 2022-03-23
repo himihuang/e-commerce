@@ -1,0 +1,123 @@
+.cus-form-control
+  display: block
+  width: 100%
+  padding: 0.375rem 0.75rem
+  font-size: 1rem
+  font-weight: 400
+  line-height: 1.5
+  background-color: transparent
+  border: none
+  border-bottom: 1px solid $color-primary--border
+  appearance: none
+  &:focus
+    outline: none
+    border-bottom: 2px solid $color-primary--text
+
+    
+
+::placeholder 
+  color: $color-primary--border
+
+.form-group
+  display: flex
+  padding: $width*1.5
+  .form-wrap
+    width: calc(100% - 5rem)
+
+
+.form-label
+  width: 5rem
+
+
+// -----**checkbox**------//
+.checkbox-wrap
+  display: block
+  position: relative
+  padding-left: $width*5
+  cursor: pointer
+  color: $color-primary--text
+
+  .cus-checkbox 
+    position: absolute
+    top: 50%
+    left: 0
+    transform: translateY(-50%)
+    width: $width*3
+    height: $width*3
+    border: 1px solid $color-primary--text
+
+    &:before
+      content: ''
+      display: none
+      position: absolute
+      top: 50%
+      left: 20%
+      transform: translateY(-50%)
+      width: $width*4
+      height: $width*4
+      background-image: url('../assets/check.svg')
+      background-size: 100% auto
+      background-repeat: no-repeat
+
+  input[type="checkbox"]
+    position: absolute
+    opacity: 0
+    cursor: pointer
+    height: 0
+    width: 0
+
+  input[type="checkbox"]:checked ~ .cus-checkbox:before
+    display: block
+
+// -----**select**------//
+.select-wrap
+  width: calc(100% - 5rem)
+  position: relative
+  &:after
+    content: ""
+    display: block
+    position: absolute
+    right: 0
+    top: 50%
+    transform: translateY(-50%) rotate(45deg)
+    width: $width*2
+    height: $width*2
+    border-bottom: 2px solid $color-primary--border
+    border-right: 2px solid $color-primary--border
+  
+.cus-select
+  appearance: none
+  width: 100%
+  border: none
+  border-bottom: 1px solid $color-primary--border
+  background-color: transparent
+  padding: $width
+  &:focus
+    outline: none
+    border-bottom: 2px solid $color-primary--text
+
+// -----**num select**------//
+
+.num-select-wrap
+  display: flex
+.num-select
+  width: $width*6
+  border-bottom: 1px solid $color-primary--text
+  position: relative
+  &:after
+    display: block
+    position: absolute
+    top: 50%
+    right: 0
+    transform: translateY(-50%)
+    font-family: "Font Awesome 5 Free"
+    font-weight: 900
+    content: "\f078"
+    z-index: -1
+  select
+    width: 100%
+    appearance: none
+    border: none
+    background-color: transparent
+    color: $color-primary--text
+    padding-left: $width*2
