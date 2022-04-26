@@ -1,5 +1,10 @@
 <template>
+  <loading :active="isLoading"></loading>
+
   <div class="bgColor-secondary">
+    <div class="cus-pt-lg cus-pb-sm">
+      <ProgressBar :step="step"></ProgressBar>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-8">
@@ -83,7 +88,11 @@
           </div>
 
           <div class="btn-wrap d-flex justify-content-end cus-mb-lg cus-mt-sm">
-            <button class="btn btn-primary--fill w-30">
+            <button
+              type=" button"
+              class="btn btn-primary--fill w-30"
+              @click="postOrder"
+            >
               <span> 確認送出 </span>
             </button>
           </div>
@@ -121,14 +130,17 @@
 import emitter from "@/libs/emitter";
 import cart from "@/components/CartCard.vue";
 import product from "@/components/ProductCard.vue";
+import ProgressBar from "@/components/ProgressBar.vue";
 
 export default {
   components: {
     cart,
     product,
+    ProgressBar,
   },
   data() {
     return {
+      isLoading: true,
       total: 0,
       cartNum: 0,
       carts: [],
@@ -136,10 +148,10 @@ export default {
       info: {
         user: {},
       },
+      step: 3,
     };
   },
   methods: {
-    getInfo() {},
     getCart() {
       this.cartNum = 0;
       this.total = 0;
@@ -152,27 +164,47 @@ export default {
             this.cartNum += item.qty;
             this.total += item.final_total;
           });
-        })
-        .catch((err) => {
-          console.log(err);
+        });
+    },
+    postOrder() {
+      const data = {
+        user: {
+          name: this.info.user.name,
+          email: this.info.user.email,
+          tel: this.info.user.tel,
+          address: this.info.user.address,
+        },
+        message: "",
+      };
+      this.$http
+        .post(
+          `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/order`,
+          { data: data }
+        )
+        .then((res) => {
+          emitter.emit("get-cart");
+          window.localStorage.setItem("getCart", res.data.orderId);
+          this.$router.push("/Carts/success");
         });
     },
   },
   mounted() {
     this.getCart();
     emitter.on("send-info", (data) => {
-      console.log("get emit:", data);
       this.info = data;
     });
     const formResult = JSON.parse(window.localStorage.getItem("formResult"));
     this.info = formResult;
-    console.log(this.info);
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   },
 };
 </script>
 
 <style lang="sass" scoped>
 @import '@/assets/sass/global.sass'
+
 
 
 

@@ -1,0 +1,26 @@
+// -----**product-card**------//
+.product-card
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  color: $color--white
+  transition: all .5s
+  &:hover
+    .img-wrap
+      img
+        width: 120%
+  .txt-wrap
+    padding-top: $width*2
+    padding-bottom: $width*2
+    text-align: center
+    color: $color--white
+  .img-wrap
+    +img(115%)
+    img
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      width: 100%
+      transition: all .5s

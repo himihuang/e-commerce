@@ -126,7 +126,4 @@ export default {
 };
 </script>
 
-<style lang="sass">
-
-@import '@/assets/sass/global.sass'
-</style>
+<style lang="sass"></style>

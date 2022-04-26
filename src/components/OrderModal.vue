@@ -42,7 +42,11 @@
                       {{ order.is_paid ? "已付款" : "未付款" }}
                     </span>
                     <label class="switch">
-                      <input type="checkbox" @change="changePaid" />
+                      <input
+                        type="checkbox"
+                        v-model="order.is_paid"
+                        @change="changePaid"
+                      />
                       <span class="controler"></span>
                     </label>
                   </p>
@@ -157,7 +161,7 @@ export default {
           this.closeModal();
         })
         .catch((err) => {
-          console.log(err);
+          this.$swal(`${err.response.data.message}`);
         });
     },
   },
@@ -169,6 +173,7 @@ export default {
 
 <style lang="sass">
 @import '@/assets/sass/global.sass'
+
 
 #productModal
   .img-wrap

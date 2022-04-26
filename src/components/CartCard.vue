@@ -28,7 +28,7 @@
       </div>
     </div>
     <button type="button" class="btn delete" @click="delCartItem(item.id)">
-      <img src="../assets/close.svg" />
+      <img src="~@/assets/img/close.svg" />
     </button>
   </div>
 </template>
@@ -52,25 +52,17 @@ export default {
         .then((res) => {
           this.carts = this.cartsItems;
           this.carts = res.data.data.carts;
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
     delCartItem(id) {
-      console.log(id);
       this.$http
         .delete(
           `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart/${id}`
         )
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this.getCart();
           this.$emit("update-item");
           emitter.emit("delete-cart");
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
     updateCart(id, qty) {
@@ -83,17 +75,16 @@ export default {
           `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart/${id}`,
           { data: this.cart }
         )
-        .then((res) => {
+        .then(() => {
           this.$emit("update-qty");
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
   },
   mounted() {
     this.getCart();
+    emitter.on("get-cart", () => {
+      this.getCart();
+    });
     emitter.on("add-cart", (data) => {
       this.carts = data;
       this.getCart();
@@ -103,6 +94,7 @@ export default {
 </script>
 
 <style lang="sass">
+
 $width: 8px
 
 $color--white: #fff

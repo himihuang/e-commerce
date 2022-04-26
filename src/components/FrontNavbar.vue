@@ -1,22 +1,25 @@
 <template>
   <div>
     <div class="nav-desk w-100" ref="navDesk">
-      <router-link to="/index" class="logo">
-        <img src="../assets/logo.svg" alt="" />
+      <router-link to="/" class="logo">
+        <img src="~@/assets/img/logo.svg" alt="" />
       </router-link>
 
       <div class="main">
         <router-link to="/products" class="nav-item">商品分類</router-link>
         <router-link to="/about" class="nav-item">關於我們</router-link>
-        <router-link to="" class="nav-item">部落格</router-link>
-        <router-link to="" class="nav-item">聯絡我們</router-link>
+        <router-link to="/blogs" class="nav-item">部落格</router-link>
+        <!-- <router-link to="" class="nav-item">聯絡我們</router-link> -->
       </div>
       <div class="side">
         <router-link to="/login" class="nav-item">
-          <i class="far fa-user"></i>
+          <i class="bi bi-person-fill fs-4"></i>
         </router-link>
         <router-link to="" class="nav-item cart-num-wrap" @click="sideCartShow">
-          <span class="cart-num">{{ cartsTotal }}</span>
+          {{ cartsTotal.type }}
+          <span class="cart-num" v-show="cartsTotal !== 0">{{
+            cartsTotal
+          }}</span>
           <i class="fas fa-shopping-cart"></i>
         </router-link>
       </div>
@@ -25,8 +28,8 @@
 
   <div class="nav-mobile" ref="navMobile">
     <div class="nav-item">
-      <router-link to="/index" class="logo">
-        <img src="../assets/logo.svg" alt="" />
+      <router-link to="/" class="logo">
+        <img src="~@/assets/img/logo.svg" alt="" />
       </router-link>
     </div>
     <div class="right-side">
@@ -149,8 +152,9 @@ export default {
 };
 </script>
 
-<style lang="sass">
+<style lang="sass" scope="scoped">
 @import '@/assets/sass/global.sass'
+
 
 // -----**animation**------//
 

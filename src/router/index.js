@@ -1,68 +1,95 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "../views/frontend/Home.vue";
 
 const routes = [
   {
     path: "/",
     name: "FrontPage",
-    component: () => import("../views/FrontPage.vue"),
+    component: () => import("../views/frontend/FrontPage.vue"),
     children: [
       {
-        path: "/index",
+        path: "/",
         name: "Home",
         component: Home,
       },
       {
         path: "/about",
         name: "About",
-        component: () => import("../views/About.vue"),
+        component: () => import("../views/frontend/About.vue"),
       },
       {
         path: "/Products",
         name: "ProductList",
-        component: () => import("../views/ProductList.vue"),
+        component: () => import("../views/frontend/ProductList.vue"),
       },
       {
         path: "/Products/:id",
         name: "ProductCategory",
-        component: () => import("../views/ProductList.vue"),
+        component: () => import("../views/frontend/ProductList.vue"),
       },
       {
         path: "/Product/:id",
         name: "Product",
-        component: () => import("../views/Product.vue"),
+        component: () => import("../views/frontend/Product.vue"),
+      },
+      {
+        path: "/Blogs",
+        name: "Blogs",
+        component: () => import("../views/frontend/BlogList.vue"),
+      },
+      {
+        path: "/Blog/:id",
+        name: "Blog",
+        component: () => import("../views/frontend/Blog.vue"),
       },
       {
         path: "/Carts",
         name: "CartStep1",
-        component: () => import("../views/CartStep1.vue"),
+        component: () => import("../views/frontend/CartStep1.vue"),
       },
       {
         path: "/Carts/step2",
         name: "CartStep2",
-        component: () => import("../views/CartStep2.vue"),
+        component: () => import("../views/frontend/CartStep2.vue"),
       },
       {
         path: "/Carts/step3",
         name: "CartStep3",
-        component: () => import("../views/CartStep3.vue"),
+        component: () => import("../views/frontend/CartStep3.vue"),
+      },
+      {
+        path: "/Carts/success",
+        name: "OrderSuccess",
+        component: () => import("../views/frontend/OrderSuccess.vue"),
+      },
+
+      {
+        path: "/:pathMatch(.*)*",
+        redirect: {
+          name: "Home",
+        },
       },
     ],
   },
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: () => import("../views/Dashboard.vue"),
+    component: () => import("../views/beckend/Dashboard.vue"),
     children: [
       {
         path: "/dashboard/Products",
         name: "AdminProducts",
-        component: () => import("../views/AdminProducts"),
+        component: () => import("../views/beckend/AdminProducts"),
       },
       {
         path: "/dashboard/Orders",
         name: "AdminOrders",
-        component: () => import("../views/AdminOrders"),
+        component: () => import("../views/beckend/AdminOrders"),
+      },
+      {
+        path: "/dashboard/Blogs",
+        name: "AdminBlogs",
+        component: () => import("../views/beckend/AdminBlogs"),
       },
     ],
   },

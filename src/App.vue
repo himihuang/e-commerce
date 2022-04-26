@@ -1,5 +1,5 @@
 <template>
-  <router-view />
+  <RouterView></RouterView>
 </template>
 <script>
 export default {};
@@ -14,8 +14,6 @@ $color--white: #fff
 $color-primary--text: #897B62
 $color-primary: #B8AC97
 $color-secondary: #FEFBF5
-
-
 
 
 ul

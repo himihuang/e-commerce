@@ -1,6 +1,6 @@
 <template>
   <div
-    class="modal fade"
+    class="modal fade productModal"
     id="productModal"
     tabindex="-1"
     role="dialog"
@@ -179,6 +179,7 @@
                   />
                 </div>
                 <button
+                  type="button"
                   class="btn btn-secondary--border w-100"
                   @click="addImage"
                 >
@@ -217,6 +218,7 @@ export default {
     return {
       modal: {},
       imageInput: "",
+      newProduct: {},
     };
   },
   methods: {
@@ -238,32 +240,44 @@ export default {
         )
         .then((res) => {
           this.product.imageUrl = "";
-          console.log(this.product.imagesUrl);
-          console.log(this.product.imageUrl);
-          console.log(res.data);
           if (this.product.imageUrl) {
             this.product.imageUrl = res.data;
           } else {
-            console.log(res.data.imageUrl);
             this.product.imagesUrl.push(res.data.imageUrl);
           }
-          console.log(this.product);
-        })
-        .catch((err) => {
-          console.dir(err);
         });
     },
     updateProduct() {
-      this.$http
-        .put(
-          `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${this.product.id}`,
-          { data: this.product }
-        )
-        .then(() => {
-          this.$emit("update-product");
-          this.closeModal();
-        });
+      if (this.isEdit) {
+        this.$http
+          .put(
+            `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${this.product.id}`,
+            { data: this.product }
+          )
+          .then(() => {
+            this.$emit("update-product");
+            this.closeModal();
+          })
+          .catch((err) => {
+            this.$swal(`${err.response.data.message}`);
+          });
+      } else {
+        this.$http
+          .post(
+            `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product`,
+            { data: this.product }
+          )
+          .then(() => {
+            this.$emit("update-product");
+            this.closeModal();
+          })
+          .catch((err) => {
+            console.dir(err);
+            this.$swal(`${err.response.data.message}`);
+          });
+      }
     },
+
     addImage() {
       if (this.imageInput) {
         this.product.imagesUrl.push(this.imageInput);
@@ -280,7 +294,12 @@ export default {
 <style lang="sass">
 @import '@/assets/sass/global.sass'
 
-#productModal
+.productModal
+  .thumbnail
+    width: 25%
+    padding-right: $width
+    img
+      width: 100%
   .img-wrap
     width: 100%
     height: 0
@@ -293,11 +312,7 @@ export default {
     display: flex
     flex-wrap: wrap
 
-  .thumbnail
-    width: 25%
-    padding-right: $width
-    img
-      width: 100%
+
   .modal-header
     background-color: $color-primary--text
     color: $color--white

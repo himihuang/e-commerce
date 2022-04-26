@@ -2,12 +2,13 @@
   <div>
     <productModal
       ref="productModal"
+      :id="product.id"
       :product="product"
       :is-edit="isEdit"
       @update-product="getProducts"
     ></productModal>
-    <div class="container">
-      <div class="cus-mt-lg cus-mb-lg">
+    <div class="cus-pt-lg cus-pb-lg">
+      <div class="container">
         <div class="mb-4 d-flex justify-content-end">
           <button
             type="button"
@@ -74,6 +75,12 @@
             </tr>
           </tbody>
         </table>
+        <div class="page-wrap cus-mt-lg">
+          <pagination
+            :pages="pagination"
+            @get-product="getProducts"
+          ></pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -81,9 +88,12 @@
 
 <script>
 import productModal from "@/components/ProductModal.vue";
+import pagination from "@/components/Pagination.vue";
+
 export default {
   components: {
     productModal,
+    pagination,
   },
   data() {
     return {
@@ -92,12 +102,13 @@ export default {
         imagesUrl: [],
       },
       isEdit: false,
+      pagination: {},
     };
   },
   methods: {
     openModal(state, product) {
       if (state == "isEdit") {
-        this.product = product;
+        this.product = { imagesUrl: [], ...product };
         this.isEdit = true;
       } else {
         this.product = {
@@ -108,14 +119,18 @@ export default {
 
       this.$refs.productModal.openModal();
     },
-    getProducts() {
+    getProducts(page = 1) {
       this.$http
         .get(
-          `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/products/all`
+          `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
         )
         .then((res) => {
-          console.log(res.data.products);
           this.products = res.data.products;
+          // .map((p) => ({
+          //   imagesUrl: [],
+          //   ...p,
+          // }));
+          this.pagination = res.data.pagination;
         })
         .catch((err) => {
           console.dir(err);
@@ -139,5 +154,7 @@ export default {
 
 <style lang="sass">
 
-@import '@/assets/sass/global.sass'
+.page-wrap
+  display: flex
+  justify-content: center
 </style>

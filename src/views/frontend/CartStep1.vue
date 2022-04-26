@@ -1,5 +1,10 @@
 <template>
-  <div class="bgColor-secondary">
+  <loading :active="isLoading"></loading>
+
+  <div class="bgColor-secondary cart-spep">
+    <div class="cus-pt-lg cus-pb-sm">
+      <ProgressBar :step="step"></ProgressBar>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-8">
@@ -17,8 +22,8 @@
           <div class="cart-title">
             <span class="h2">加購商品</span>
           </div>
-          <div class="row row-cols-4">
-            <div class="col" v-for="product in products" :key="product.id">
+          <div class="row row-cols-2 row-cols-lg-4">
+            <div class="col mb-4" v-for="product in products" :key="product.id">
               <product :product-item="product"></product>
             </div>
           </div>
@@ -29,7 +34,7 @@
             </router-link>
           </div>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-sm-6 col-md-4">
           <div class="cart-title">
             <span class="h2">訂單資訊</span>
           </div>
@@ -61,19 +66,22 @@
 <script>
 import cart from "@/components/CartCard.vue";
 import product from "@/components/ProductCard.vue";
-
+import ProgressBar from "@/components/ProgressBar.vue";
 export default {
   components: {
     cart,
     product,
+    ProgressBar,
   },
   data() {
     return {
+      isLoading: true,
       products: [],
       total: 0,
       cartNum: 0,
       carts: [],
       cart: {},
+      step: 1,
     };
   },
   methods: {
@@ -98,25 +106,21 @@ export default {
             this.cartNum += item.qty;
             this.total += item.final_total;
           });
-          console.log("getCart", this.cartNum);
-          console.log("getCart", this.total);
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
   },
   mounted() {
     this.getProduct();
     this.getCart();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   },
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 @import '@/assets/sass/global.sass'
-
-
 
 
 .cart-title
@@ -134,15 +138,20 @@ export default {
 
 
 // -----**product-card**------//
-.product-card
-  color: $color-primary--text
-  .btn-line
+.cart-spep
+  .product-card
     color: $color-primary--text
-    border-top: 1px solid $color-primary--text
-    border-bottom: 1px solid $color-primary--text
-    &:hover
-      color: $color--white
-      background-color: $color-primary--text
+    .txt-wrap
+      color: $color-primary--text
+    .btn-line
+      color: $color-primary--text
+      border-top: 1px solid $color-primary--text
+      border-bottom: 1px solid $color-primary--text
+      &:hover
+        color: $color--white
+        &:before
+          color: $color--white
+          background-color: $color-primary--text
 
 // -----**cart-info**------//
 .cart-info

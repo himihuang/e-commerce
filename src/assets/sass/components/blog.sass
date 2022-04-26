@@ -1,0 +1,30 @@
+.blog
+  background-color: rgba($color-primary--border, .6)
+  margin-bottom: $width*3
+  padding: $width*2
+  .img-wrap
+    +img(75%)
+    img
+      width: 100%
+      @extend %absolute-center
+  .content
+    color: $color--white
+    display: flex
+    flex-direction: column
+    justify-content: center
+  .title-area
+    border-top: 1px solid $color--white
+    border-bottom: 1px solid $color--white
+    display: flex
+    flex-direction: row
+    align-items: center
+    .date
+      border-right: 1px solid $color--white
+      padding: $width*2
+      margin-bottom: 0
+    .title
+      padding: $width*2
+      margin-bottom: 0
+  .txt-area
+    padding: $width*2
+    border-bottom: 1px solid $color--white

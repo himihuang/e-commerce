@@ -1,5 +1,10 @@
 <template>
+  <loading :active="isLoading"></loading>
+
   <div class="bgColor-secondary">
+    <div class="cus-pt-lg cus-pb-sm">
+      <ProgressBar :step="step"></ProgressBar>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-8">
@@ -11,7 +16,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="name" class="col-form-label form-label"
-                    >姓名</label
+                    >姓名<span class="text-danger">*</span></label
                   >
                   <div class="form-wrap">
                     <Field
@@ -31,10 +36,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-lg-6">
                 <div class="form-group">
                   <label for="email" class="col-form-label form-label"
-                    >信箱</label
+                    >信箱<span class="text-danger">*</span></label
                   >
                   <div class="form-wrap">
                     <Field
@@ -54,10 +59,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-lg-6">
                 <div class="form-group">
                   <label for="phone" class="col-form-label form-label"
-                    >電話</label
+                    >電話<span class="text-danger">*</span></label
                   >
                   <div class="form-wrap">
                     <Field
@@ -66,7 +71,7 @@
                       id="phone"
                       class="cus-form-control"
                       placeholder="例：0912123123"
-                      rules="required|digits:10"
+                      :rules="isPhone"
                       :class="{ 'is-invalid': errors['電話'] }"
                       v-model="form.member.tel"
                     ></Field>
@@ -97,7 +102,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="recipientName" class="col-form-label form-label"
-                    >姓名</label
+                    >姓名<span class="text-danger">*</span></label
                   >
                   <div class="form-wrap">
                     <Field
@@ -115,10 +120,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-lg-6">
                 <div class="form-group">
                   <label for="recipientEmail" class="col-form-label form-label"
-                    >信箱</label
+                    >信箱<span class="text-danger">*</span></label
                   >
                   <div class="form-wrap">
                     <Field
@@ -138,10 +143,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-lg-6">
                 <div class="form-group">
                   <label for="recipientPhone" class="col-form-label form-label"
-                    >電話</label
+                    >電話<span class="text-danger">*</span></label
                   >
                   <div class="form-wrap">
                     <Field
@@ -170,7 +175,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="name" class="col-form-label form-label"
-                    >付款方式</label
+                    >付款方式<span class="text-danger">*</span></label
                   >
                   <div class="select-wrap">
                     <select class="cus-select" v-model="form.payment">
@@ -185,13 +190,13 @@
             </div>
 
             <div class="cart-title">
-              <span class="h2">送貨資料</span>
+              <span class="h2">送貨資料*</span>
             </div>
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
                   <label for="name" class="col-form-label form-label"
-                    >送貨方式</label
+                    >送貨方式<span class="text-danger">*</span></label
                   >
                   <div class="select-wrap">
                     <select class="cus-select" v-model="form.dilevery">
@@ -208,7 +213,7 @@
                   <label
                     for="recipientAddress"
                     class="col-form-label form-label"
-                    >收件人地址</label
+                    >收件人地址<span class="text-danger">*</span></label
                   >
                   <div class="form-wrap">
                     <Field
@@ -279,22 +284,24 @@
 </template>
 
 <script>
-import emitter from "@/libs/emitter";
 import cart from "@/components/CartCard.vue";
 import product from "@/components/ProductCard.vue";
-
+import ProgressBar from "@/components/ProgressBar.vue";
 export default {
   components: {
     cart,
     product,
+    ProgressBar,
   },
   data() {
     return {
+      isLoading: true,
       total: 0,
       cartNum: 0,
       carts: [],
       cart: {},
       data: {},
+      step: 2,
       form: {
         member: {
           name: "",
@@ -315,6 +322,14 @@ export default {
     };
   },
   methods: {
+    isPhone(value) {
+      if (!value) {
+        return "此欄位為必填";
+      } else {
+        const phoneNumber = /^(09)[0-9]{8}$/;
+        return phoneNumber.test(value) ? true : "需要正確的電話號碼";
+      }
+    },
     fillInfo() {
       this.userInfo = true;
       this.form.user.name = this.form.member.name;
@@ -349,14 +364,14 @@ export default {
             this.cartNum += item.qty;
             this.total += item.final_total;
           });
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
   },
   mounted() {
     this.getCart();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   },
 };
 </script>
@@ -365,10 +380,6 @@ export default {
 @import '@/assets/sass/global.sass'
 
 
-.bgColor-secondary
-  background-color: $color-secondary
-  position: relative
-  z-index: 0
 
 
 .cart-title

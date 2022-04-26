@@ -1,5 +1,5 @@
 <template>
-  <div class="product-card">
+  <div class="product-card h-100">
     <router-link :to="`/Product/${productItem.id}`" class="">
       <div class="img-wrap">
         <img :src="product.imageUrl" />
@@ -42,9 +42,6 @@ export default {
         .get(`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
           this.carts = res.data.data.carts;
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
     addToCart(product, qty = 1) {
@@ -67,9 +64,6 @@ export default {
           });
           emitter.emit("get-cart");
           emitter.emit("add-cart", this.carts);
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
   },
@@ -81,6 +75,7 @@ export default {
 
 <style lang="sass">
 @import '@/assets/sass/global.sass'
+
 
 
 
@@ -102,11 +97,12 @@ export default {
     text-align: center
     color: $color--white
   .img-wrap
-    width: 100%
-    height: 0
-    padding-bottom: 115%
-    overflow: hidden
+    +img(115%)
     img
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
       width: 100%
       transition: all .5s
 </style>

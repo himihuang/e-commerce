@@ -1,5 +1,5 @@
 
-
+// -----**bg-color**------//
 .bgColor-secondary
   background-color: $color-secondary
   position: relative
@@ -10,10 +10,18 @@
   background-color: $color-primary--border
 
 
+// -----**color**------//
+
 .color--white
  color: $color--white
+.color--text
+  color: $color-primary--text
 
 
+.fill-text
+  fill: $color-primary--text!important
+
+// -----**space**------//
 
 .cus-mb-lg
   margin-bottom: $space-lg
@@ -29,3 +37,32 @@
   margin-bottom: $space-sm
 .cus-mt-sm
   margin-top: $space-sm
+
+
+.cus-pb-lg
+  padding-bottom: $space-lg
+  @include pad
+    padding-top: $space-sm
+.cus-pt-lg
+  padding-top: $space-lg
+  @include pad
+    padding-top: $space-sm
+
+
+.cus-pb-sm
+  padding-bottom: $space-sm
+.cus-pt-sm
+  padding-top: $space-sm
+
+
+.mt-navbar-lg
+  margin-top: $width*20
+  @include pad
+    margin-top: $width*15
+
+.mt-navbar-sm
+  margin-top: $width*10
+  @include pad
+    margin-top: $width*5
+
+

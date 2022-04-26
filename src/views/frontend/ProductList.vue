@@ -1,5 +1,7 @@
 <template>
-  <div class="productList">
+  <loading :active="isLoading"></loading>
+
+  <div class="mt-navbar-lg">
     <div class="container">
       <div class="row">
         <div class="col-12 col-lg-3">
@@ -13,14 +15,14 @@
           </div>
           <div class="category-list d-none d-lg-block">
             <div class="category-title">
-              <img src="../assets/shine.svg" class="dec-top" />
+              <img src="~@/assets/img/shine.svg" class="dec-top" />
               <h5 class="title">分類</h5>
-              <img src="../assets/shine.svg" class="dec-bottom" />
+              <img src="~@/assets/img/shine.svg" class="dec-bottom" />
             </div>
 
             <div class="category-item" @click="getCategoryAll">
               <router-link to="/products/all">
-                <img src="../assets/star.svg" class="me-2 star" />
+                <img src="~@/assets/img/star.svg" class="me-2 star" />
                 全部
               </router-link>
             </div>
@@ -31,7 +33,7 @@
               @click="getCategoryItems(item)"
             >
               <router-link :to="`/products/${item}`">
-                <img src="../assets/star.svg" class="me-2 star" />
+                <img src="~@/assets/img/star.svg" class="me-2 star" />
                 {{ item }}</router-link
               >
             </div>
@@ -57,24 +59,36 @@
               <product :product-item="product"></product>
             </div>
           </div>
+          <div class="page-wrap cus-mt-sm cus-mb-lg">
+            <pagination
+              :pages="pagination"
+              @get-product="getProducts"
+            ></pagination>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import product from "@/components/ProductCard.vue";
+import pagination from "@/components/Pagination.vue";
+
 export default {
   components: {
     product,
+    pagination,
   },
   data() {
     return {
+      isLoading: true,
       products: [],
       cart: {},
       category: [],
       categoryProducts: [],
       selected: "請選擇",
+      pagination: {},
     };
   },
   watch: {
@@ -83,13 +97,15 @@ export default {
     },
   },
   methods: {
-    getProduct() {
+    getProduct(page = 1) {
       this.$http
         .get(
-          `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`
+          `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/?page=${page}`
         )
         .then((res) => {
           this.products = res.data.products;
+          this.pagination = res.data.pagination;
+
           this.products.forEach((item) => {
             if (!this.category.includes(item.category)) {
               return this.category.push(item.category);
@@ -111,6 +127,7 @@ export default {
   },
   mounted() {
     this.getProduct();
+    this.isLoading = false;
   },
 };
 </script>
@@ -118,20 +135,13 @@ export default {
 <style lang="sass">
 @import '@/assets/sass/global.sass'
 
+
 $width: 8px
 
 $color--white: #fff
 $color-primary--text: #897B62
 $color-primary: #B8AC97
 $color-secondary: #FEFBF5
-
-
-
-
-.productList
-  margin-top: $width*20
-  @include pad
-    margin-top: $width*15
 
 
 // -----**btn**------//
@@ -184,6 +194,7 @@ $color-secondary: #FEFBF5
   position: relative
   transition: all 1s ease
   a
+    z-index: 3
     color: $color--white
     &:hover
       color: $color--white
@@ -212,7 +223,6 @@ $color-secondary: #FEFBF5
     width: 100%
     height: 100%
     position: absolute
-    z-index: -1
   &:before
     top: 5px
     left: 5px
@@ -246,4 +256,18 @@ $color-secondary: #FEFBF5
     border: none
     background-color: transparent
     color: $color-primary--text
+
+// -----**pagination**------//
+
+.page-wrap
+  display: flex
+  justify-content: flex-end
+.page
+  .page-item
+    color: $color--white
+    path
+      fill: $color--white
+
+  .page-item.active
+    border-bottom: 1px solid $color--white
 </style>

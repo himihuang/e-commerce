@@ -1,4 +1,6 @@
 <template>
+  <loading :active="isLoading"></loading>
+
   <div class="home">
     <div class="banner">
       <swiper
@@ -84,7 +86,10 @@
               </div>
             </div>
             <div class="btn-wrap mt-4">
-              <button type="button" class="btn btn-text">View All</button>
+              <button type="button" class="btn btn-text">
+                View All
+                <div class="circle"></div>
+              </button>
             </div>
           </div>
         </div>
@@ -101,7 +106,10 @@
               </div>
             </div>
             <div class="btn-wrap mt-4">
-              <button type="button" class="btn btn-text">View All</button>
+              <button type="button" class="btn btn-text">
+                View All
+                <div class="circle"></div>
+              </button>
             </div>
           </div>
           <div class="col-md-8 order-12 order-md-1 main">
@@ -147,7 +155,10 @@
           </div>
         </div>
         <div class="btn-wrap text-center mt-4">
-          <button type="button" class="btn btn-text">View All</button>
+          <button type="button" class="btn btn-text">
+            View All
+            <div class="circle"></div>
+          </button>
         </div>
       </div>
     </div>
@@ -245,6 +256,7 @@ export default {
   },
   data() {
     return {
+      isLoading: true,
       modules: [Navigation, Pagination, EffectCoverflow],
       swiperOptions: [],
       products: [],
@@ -292,13 +304,13 @@ export default {
 
   mounted() {
     this.getProducts();
+    this.isLoading = false;
   },
 };
 </script>
 
 <style lang="sass">
 @import '@/assets/sass/global.sass'
-
 
 .title-block
   display: flex
@@ -315,172 +327,170 @@ export default {
       bottom: 100%
       left: 50%
       transform: translateX(-50%)
-      background-image: url('../assets/shine.svg')
+      background-image: url('~@/assets/img/shine.svg')
       background-size: cover
       background-position: center
 
 
-.home
-  margin-top: $width*20
-  @include pad
-    margin-top: $width*15
+
 
 // -----**swiper**------//
-.swiper
-  width: 100%;
-  padding-top: $width*10
-  padding-bottom: $width*10
-  position: relative
-  &:before
-    content: ''
-    display: block
-    position: absolute
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%) scaleX(2) skewY(49deg)
-    transform-origin: 50%
-    width: 40%
-    height: 40%
-    border-radius: 50%
-    border: 2px solid #fff
-    z-index: -1
-    animation: spin 5s infinite
-
-@keyframes spin
-  0%
-    transform: translate(-50%, -50%) scaleX(2) skewY(45deg)
-
-  50%
-    transform: translate(-50%, -50%) scaleX(2) skewY(50deg)
-
-  100%
-    transform: translate(-50%, -50%) scaleX(2) skewY(45deg)
-
-
-.swiper-slide
-  background-position: center;
-  background-size: cover;
-  visibility: hidden
-
-.swiper-slide
-  .img-wrap
-    width: 100%
-    height: 0
-    padding-bottom: 115%
-    overflow: hidden
-    img
-      width: 100%
-
-
-.swiper-slide.swiper-slide-active
-  .img-wrap
-    border-radius: 50% 50% 0 0
-
-  position: relative
-  .text
-    position: absolute
-    top: 50%
-    left: -10%
-    transform: translateY(-50%)
-    @extend %text-shadow
-
-  .circle
-    width: 100%
-    height: 100%
-    position: absolute
-    top: 0%
-    left: 0%
-    right: 0
-    bottom: 0
-    margin: auto
-    border-radius: 50%
-    border: 2px solid $color--white
-    transform-style: preserve-3d;
-    transform: rotateZ(67deg) rotateY(116deg);
-    z-index: 2
-
+.home
+  .swiper
+    width: 100%;
+    padding-top: $width*10
+    padding-bottom: $width*10
+    position: relative
     &:before
       content: ''
       display: block
-      width: $width*5
-      height: $width*5
       position: absolute
-      top: 0
-      left: 0
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%) scaleX(2) skewY(49deg)
+      transform-origin: 50%
+      width: 40%
+      height: 40%
+      border-radius: 50%
+      border: 2px solid #fff
+      z-index: -1
+      animation: spin 5s infinite
+
+  @keyframes spin
+    0%
+      transform: translate(-50%, -50%) scaleX(2) skewY(45deg)
+
+    50%
+      transform: translate(-50%, -50%) scaleX(2) skewY(50deg)
+
+    100%
+      transform: translate(-50%, -50%) scaleX(2) skewY(45deg)
+
+
+  .swiper-slide
+    background-position: center;
+    background-size: cover;
+    visibility: hidden
+
+  .swiper-slide
+    .img-wrap
+      width: 100%
+      height: 0
+      padding-bottom: 115%
+      overflow: hidden
+      img
+        width: 100%
+
+
+  .swiper-slide.swiper-slide-active
+    .img-wrap
+      border-radius: 50% 50% 0 0
+
+    position: relative
+    .text
+      position: absolute
+      top: 50%
+      left: -10%
+      transform: translateY(-50%)
+      z-index: 2
+      @extend %text-shadow
+
+    .circle
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 0%
+      left: 0%
       right: 0
       bottom: 0
       margin: auto
-      background-image: url('../assets/Star-1.svg')
-      animation: move 6s linear infinite
+      border-radius: 50%
+      border: 2px solid $color--white
+      transform-style: preserve-3d;
+      transform: rotateZ(67deg) rotateY(116deg);
+      z-index: 2
 
-    &:after
-      content: ''
-      display: block
-      width: $width*5
-      height: $width*5
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      margin: auto
-      background-image: url('../assets/Star-1.svg')
-      animation: circle 6s linear infinite
+      &:before
+        content: ''
+        display: block
+        width: $width*5
+        height: $width*5
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        margin: auto
+        background-image: url('~@/assets/img/Star-1.svg')
+        animation: move 6s linear infinite
 
-
-@keyframes circle
-  0%
-    transform: rotateZ(0) translateX(200px) rotateZ(0) rotateY(-70deg)
-  100%
-    transform: rotateZ(360deg) translateX(200px) rotateZ(-360deg) rotateY(-70deg)
-
-@keyframes move
-  0%
-    transform: rotateZ(360deg) translateX(200px) rotateZ(-360deg) rotateY(-70deg)
-  100%
-    transform: rotateZ(0) translateX(200px) rotateZ(0) rotateY(-70deg)
-
-  .img-wrap
-    border-radius: 45% 45% 0 0
-
-.arrow--prev
-  position: absolute
-  left: 32%
-  right: auto
-  top: 72%
-  color: $color--white
-  cursor: pointer
-  @include pad
-    left: 8%
-
-.arrow--next
-  position: absolute
-  right: 32%
-  left: auto
-  top: 72%
-  color: $color--white
-  cursor: pointer
-  @include pad
-    right: 8%
+      &:after
+        content: ''
+        display: block
+        width: $width*5
+        height: $width*5
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        margin: auto
+        background-image: url('~@/assets/img/Star-1.svg')
+        animation: circle 6s linear infinite
 
 
-.swiper-pagination-fraction
-  bottom: 25%
-  left: 0
-  width: 100%
-  color: $color--white
-  z-index: 0
-  @include pad
-    bottom: 22%
+  @keyframes circle
+    0%
+      transform: rotateZ(0) translateX(200px) rotateZ(0) rotateY(-70deg)
+    100%
+      transform: rotateZ(360deg) translateX(200px) rotateZ(-360deg) rotateY(-70deg)
 
-.swiper-slide.swiper-slide-next .text,
-.swiper-slide.swiper-slide-prev .text
-  display: none
+  @keyframes move
+    0%
+      transform: rotateZ(360deg) translateX(200px) rotateZ(-360deg) rotateY(-70deg)
+    100%
+      transform: rotateZ(0) translateX(200px) rotateZ(0) rotateY(-70deg)
 
-.swiper-slide.swiper-slide-next,
-.swiper-slide.swiper-slide-active,
-.swiper-slide.swiper-slide-prev
-  visibility: visible
+    .img-wrap
+      border-radius: 45% 45% 0 0
+
+  .arrow--prev
+    position: absolute
+    left: 32%
+    right: auto
+    bottom: 20%
+    color: $color--white
+    cursor: pointer
+    @include pad
+      left: 8%
+
+  .arrow--next
+    position: absolute
+    right: 32%
+    left: auto
+    bottom: 20%
+    color: $color--white
+    cursor: pointer
+    @include pad
+      right: 8%
+
+
+  .swiper-pagination-fraction
+    bottom: 20%
+    left: 0
+    width: 100%
+    color: $color--white
+    z-index: 0
+
+
+  .swiper-slide.swiper-slide-next .text,
+  .swiper-slide.swiper-slide-prev .text
+    display: none
+
+  .swiper-slide.swiper-slide-next,
+  .swiper-slide.swiper-slide-active,
+  .swiper-slide.swiper-slide-prev
+    visibility: visible
 
 
 // -----**collection**------//
@@ -492,13 +502,18 @@ export default {
   .img-wrap
     position: relative
     +img(115%)
+    &:hover
+      img
+        width: 120%
+
     img
       width: 100%
       transition: all .5s
+      @extend %absolute-center
 
   .side
     padding: $width*15 $width*5
-    background-image: url('../assets/bg-collection.png')
+    background-image: url('~@/assets/img/bg-collection.png')
     background-size: cover
     position: relative
     @include pad
@@ -546,6 +561,8 @@ export default {
     +img(75%)
     .text-wrap
       @extend %absolute-center
+      color: $color--white
+      
     .inner-border
       @extend %absolute-center
       height: 80%
@@ -567,7 +584,7 @@ export default {
   .middle-part
     .category-item--landscape
       &:before
-        background-image: url('../assets/category-landscape-1.png')
+        background-image: url('~@/assets/img/category-landscape-1.png')
       .inner-border
         border-radius: 100% 0 0 0
 
@@ -587,7 +604,7 @@ export default {
   .right-part
     .category-item--landscape
       &:before
-        background-image: url('../assets/category-landscape-2.png')
+        background-image: url('~@/assets/img/category-landscape-2.png')
       .inner-border
         border-radius: 0 100% 0 0
 
@@ -602,7 +619,7 @@ export default {
     content: ''
     display: block
     @extend %absolute-fill
-    background-image: url('../assets/category-vertival.png')
+    background-image: url('~@/assets/img/category-vertival.png')
     background-size: cover
     background-repeat: no-repeat
 
