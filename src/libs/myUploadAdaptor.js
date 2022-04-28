@@ -10,7 +10,6 @@ class MyUploadAdapter {
   upload() {
     const formData = new FormData();
     return new Promise((resolve) => {
-      console.log(this.loader.file);
       this.loader.file
         .then((loadFile) => {
           formData.append("file-to-upload", loadFile);

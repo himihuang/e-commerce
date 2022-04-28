@@ -31,10 +31,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="product in products" :key="product.id">
+            <tr v-for="(product, idx) in products" :key="product.id">
               <td width="30%">
                 <div class="img-wrap me-3">
-                  <img :src="product.imageUrl" alt="" class="w-100" />
+                  <img
+                    :src="product.imageUrl"
+                    :alt="`商品圖片-${idx}`"
+                    class="w-100"
+                  />
                 </div>
                 <span>{{ product.title }}</span>
               </td>
@@ -153,7 +157,6 @@ export default {
 </script>
 
 <style lang="sass">
-
 .page-wrap
   display: flex
   justify-content: center

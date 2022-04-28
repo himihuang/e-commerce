@@ -145,7 +145,7 @@
               </div>
               <div class="thumbnail" v-if="product.imageUrl">
                 <div class="img-wrap">
-                  <img :src="product.imageUrl" />
+                  <img :src="product.imageUrl" alt="商品圖片" />
                 </div>
               </div>
               <!-- 延伸技巧，多圖 -->
@@ -157,7 +157,7 @@
                   :key="image + 123"
                 >
                   <div class="img-wrap">
-                    <img :src="image" />
+                    <img :src="image" :alt="`商品圖片-${idx}`" />
                   </div>
                   <button
                     type="button"
@@ -311,7 +311,6 @@ export default {
   .img-group
     display: flex
     flex-wrap: wrap
-
 
   .modal-header
     background-color: $color-primary--text

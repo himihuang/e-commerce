@@ -15,14 +15,22 @@
           </div>
           <div class="category-list d-none d-lg-block">
             <div class="category-title">
-              <img src="~@/assets/img/shine.svg" class="dec-top" />
+              <img src="~@/assets/img/shine.svg" class="dec-top" alt="光芒" />
               <h5 class="title">分類</h5>
-              <img src="~@/assets/img/shine.svg" class="dec-bottom" />
+              <img
+                src="~@/assets/img/shine.svg"
+                class="dec-bottom"
+                alt="光芒"
+              />
             </div>
 
             <div class="category-item" @click="getCategoryAll">
               <router-link to="/products/all">
-                <img src="~@/assets/img/star.svg" class="me-2 star" />
+                <img
+                  src="~@/assets/img/star.svg"
+                  class="me-2 star"
+                  alt="星星"
+                />
                 全部
               </router-link>
             </div>
@@ -33,7 +41,11 @@
               @click="getCategoryItems(item)"
             >
               <router-link :to="`/products/${item}`">
-                <img src="~@/assets/img/star.svg" class="me-2 star" />
+                <img
+                  src="~@/assets/img/star.svg"
+                  class="me-2 star"
+                  alt="星星"
+                />
                 {{ item }}</router-link
               >
             </div>
@@ -49,7 +61,6 @@
             >
               <product :product-item="product"></product>
             </div>
-
             <div
               class="col mb-4"
               v-for="product in categoryProducts"
@@ -62,7 +73,7 @@
           <div class="page-wrap cus-mt-sm cus-mb-lg">
             <pagination
               :pages="pagination"
-              @get-product="getProducts"
+              @get-product="getProduct"
             ></pagination>
           </div>
         </div>
@@ -117,17 +128,20 @@ export default {
       this.categoryProducts = this.products;
     },
     getCategoryItems(category = this.selected) {
-      this.categoryProducts = [];
-      this.products.filter((item) => {
-        if (category === item.category) {
-          return this.categoryProducts.push(item);
-        }
-      });
+      this.$http
+        .get(
+          `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/?category=${category}`
+        )
+        .then((res) => {
+          this.categoryProducts = res.data.products;
+        });
     },
   },
   mounted() {
     this.getProduct();
     this.isLoading = false;
+
+    this.getCategoryItems(this.$route.params.id);
   },
 };
 </script>
@@ -135,14 +149,12 @@ export default {
 <style lang="sass">
 @import '@/assets/sass/global.sass'
 
-
 $width: 8px
 
 $color--white: #fff
 $color-primary--text: #897B62
 $color-primary: #B8AC97
 $color-secondary: #FEFBF5
-
 
 // -----**btn**------//
 .btn-line
@@ -169,8 +181,6 @@ $color-secondary: #FEFBF5
     color: $color-primary--text
     &::before
       height: 100%
-
-
 
 .btn-primary--fill
   background-color: $color-primary--text
@@ -235,7 +245,6 @@ $color-secondary: #FEFBF5
     border-radius: 500px 500px 0 0
 
 // -----**form**------//
-
 .cus-form-select
   border-bottom: 1px solid $color-primary--text
   position: relative
@@ -258,10 +267,10 @@ $color-secondary: #FEFBF5
     color: $color-primary--text
 
 // -----**pagination**------//
-
 .page-wrap
   display: flex
   justify-content: flex-end
+
 .page
   .page-item
     color: $color--white

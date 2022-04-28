@@ -1,8 +1,12 @@
 <template>
-  <div class="cart-card" v-for="item in carts" :key="item.product.id">
+  <div class="cart-card" v-for="(item, idx) in carts" :key="item.product.id">
     <div class="img-outer me-3">
       <div class="img-wrap">
-        <img :src="item.product.imageUrl" class="img-fluid" />
+        <img
+          :src="item.product.imageUrl"
+          class="img-fluid"
+          :alt="`商品圖片-${idx}`"
+        />
       </div>
     </div>
     <div class="txt-wrap me-3">
@@ -28,7 +32,7 @@
       </div>
     </div>
     <button type="button" class="btn delete" @click="delCartItem(item.id)">
-      <img src="~@/assets/img/close.svg" />
+      <img src="~@/assets/img/close.svg" alt="關閉" />
     </button>
   </div>
 </template>
@@ -108,7 +112,6 @@ $color-secondary: #FEFBF5
   padding-top: $width*3
   padding-bottom: $width*3
   color: $color-primary--text
-
   .img-outer
     width: $width*12
   .img-wrap

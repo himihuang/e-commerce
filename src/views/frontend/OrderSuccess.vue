@@ -1,7 +1,7 @@
 <template>
   <loading :active="isLoading"></loading>
 
-  <div class="bgColor-secondary mt-navbar-sm">
+  <div class="bgColor-secondary">
     <div class="cus-pt-lg cus-pb-lg">
       <div class="container">
         <div class="row">
@@ -14,7 +14,7 @@
           </div>
           <div class="col-12 col-md-6 success-content">
             <div class="title-wrap">
-              <img src="~@/assets/img/thankYou.svg" alt="" />
+              <img src="~@/assets/img/thankYou.svg" alt="謝謝購買" />
             </div>
             <div class="content cus-mb-sm">
               <div class="h4 mb-4">
@@ -25,10 +25,13 @@
               <span>這是您的訂單編號：{{ order_id }}</span>
             </div>
             <div class="btn-wrap">
-              <router-link to="/" class="btn btn-primary--fill w-30">
+              <router-link to="/" class="btn btn-primary--fill w-30 ms-2">
                 <span> 回首頁 </span>
               </router-link>
-              <router-link to="/Products" class="btn btn-primary--fill w-30">
+              <router-link
+                to="/Products"
+                class="btn btn-primary--fill w-30 ms-2"
+              >
                 <span> 繼續購物 </span>
               </router-link>
             </div>
@@ -59,7 +62,6 @@ export default {
 <style lang="sass">
 @import '@/assets/sass/global.sass'
 
-
 .success-img
   .img-wrap
     +img(120%)
@@ -81,8 +83,6 @@ export default {
       height: 100%
       border: $width/4 solid $color-primary--text
       border-radius: 500px 500px 0 0
-
-
 
 .success-content
   text-align: center

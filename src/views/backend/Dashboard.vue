@@ -20,7 +20,6 @@ export default {
 <style lang="sass" scope="scoped">
 @import '@/assets/sass/global.sass'
 
-
 .dashboard
   font-family: 'Noto Serif TC', serif
   background-color: $color-secondary

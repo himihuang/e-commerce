@@ -54,7 +54,6 @@ export default {
 <style lang="sass">
 @import '@/assets/sass/global.sass'
 
-
 .progress-wrap
   display: flex
   justify-content: center

@@ -74,22 +74,22 @@ const routes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: () => import("../views/beckend/Dashboard.vue"),
+    component: () => import("../views/backend/Dashboard.vue"),
     children: [
       {
-        path: "/dashboard/Products",
+        path: "Products",
         name: "AdminProducts",
-        component: () => import("../views/beckend/AdminProducts"),
+        component: () => import("../views/backend/AdminProducts"),
       },
       {
-        path: "/dashboard/Orders",
+        path: "Orders",
         name: "AdminOrders",
-        component: () => import("../views/beckend/AdminOrders"),
+        component: () => import("../views/backend/AdminOrders"),
       },
       {
-        path: "/dashboard/Blogs",
+        path: "Blogs",
         name: "AdminBlogs",
-        component: () => import("../views/beckend/AdminBlogs"),
+        component: () => import("../views/backend/AdminBlogs"),
       },
     ],
   },

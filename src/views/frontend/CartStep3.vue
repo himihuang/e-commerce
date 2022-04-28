@@ -19,7 +19,11 @@
             <div class="cart-card" v-for="item in carts" :key="item.product.id">
               <div class="img-outer me-3">
                 <div class="img-wrap">
-                  <img :src="item.product.imageUrl" class="img-fluid" />
+                  <img
+                    :src="item.product.imageUrl"
+                    class="img-fluid"
+                    alt="商品圖片"
+                  />
                 </div>
               </div>
               <div class="txt-wrap me-3">
@@ -87,7 +91,9 @@
             </div>
           </div>
 
-          <div class="btn-wrap d-flex justify-content-end cus-mb-lg cus-mt-sm">
+          <div
+            class="btn-wrap d-none d-mb-flex justify-content-end cus-mb-lg cus-mt-sm"
+          >
             <button
               type=" button"
               class="btn btn-primary--fill w-30"
@@ -119,6 +125,18 @@
                 <span class="h5">{{ total }}</span>
               </div>
             </div>
+          </div>
+
+          <div
+            class="btn-wrap d-flex d-mb-none justify-content-end cus-mb-lg cus-mt-sm"
+          >
+            <button
+              type=" button"
+              class="btn btn-primary--fill w-30"
+              @click="postOrder"
+            >
+              <span> 確認送出 </span>
+            </button>
           </div>
         </div>
       </div>
@@ -204,12 +222,6 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/sass/global.sass'
-
-
-
-
-
-
 
 // -----**product-card**------//
 .product-card

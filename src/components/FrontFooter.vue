@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-12 col-md-3">
           <router-link to="/" class="logo">
-            <img src="~@/assets/img/footer-logo.svg" alt="" />
+            <img src="~@/assets/img/footer-logo.svg" alt="JJ飾品" />
           </router-link>
         </div>
         <div class="col-12 col-md-3">
@@ -66,7 +66,6 @@
 
 <style lang="sass">
 @import '@/assets/sass/global.sass'
-
 
 .footer
   padding-top: $width*10
@@ -133,7 +132,6 @@
       position: relative
       padding-left: $width*4
       padding-bottom: $width
-
 
 .copyright
   text-align: center

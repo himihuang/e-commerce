@@ -236,7 +236,7 @@
             </div>
 
             <div
-              class="btn-wrap d-flex justify-content-between cus-mb-lg cus-mt-sm"
+              class="btn-wrap d-none d-md-flex justify-content-between cus-mb-lg cus-mt-sm"
             >
               <router-link
                 to="/Carts/step1"
@@ -277,6 +277,24 @@
               </div>
             </div>
           </div>
+
+           <div
+              class="btn-wrap d-flex d-md-none justify-content-between cus-mb-lg cus-mt-sm"
+            >
+              <router-link
+                to="/Carts/step1"
+                class="btn btn-primary--border w-30"
+              >
+                回上一頁
+              </router-link>
+              <button
+                type="submit"
+                @click.prevent="submit"
+                class="btn btn-primary--fill w-30"
+              >
+                <span> 確認送出 </span>
+              </button>
+            </div>
         </div>
       </div>
     </div>
@@ -379,9 +397,6 @@ export default {
 <style lang="sass" scoped>
 @import '@/assets/sass/global.sass'
 
-
-
-
 .cart-title
   padding-top: $width*5
   padding-bottom: $width*5
@@ -391,10 +406,8 @@ export default {
     position: relative
     &:before
       content: "//  "
-
     &:after
       content: "  //"
-
 
 // -----**product-card**------//
 .product-card

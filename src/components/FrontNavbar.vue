@@ -2,7 +2,7 @@
   <div>
     <div class="nav-desk w-100" ref="navDesk">
       <router-link to="/" class="logo">
-        <img src="~@/assets/img/logo.svg" alt="" />
+        <img src="~@/assets/img/logo.svg" alt="JJ飾品" />
       </router-link>
 
       <div class="main">
@@ -29,12 +29,13 @@
   <div class="nav-mobile" ref="navMobile">
     <div class="nav-item">
       <router-link to="/" class="logo">
-        <img src="~@/assets/img/logo.svg" alt="" />
+        <img src="~@/assets/img/logo.svg" alt="JJ飾品" />
       </router-link>
     </div>
     <div class="right-side">
       <router-link to="" class="nav-item cart-num-wrap" @click="sideCartShow">
-        <span class="cart-num">{{ cartsTotal }}</span>
+        {{ cartsTotal.type }}
+        <span class="cart-num" v-show="cartsTotal !== 0">{{ cartsTotal }}</span>
         <i class="fas fa-shopping-cart"></i>
       </router-link>
       <div class="ham-wrap">
@@ -119,8 +120,8 @@ export default {
         });
     },
     handleScroll(e) {
-      const MobileNavH = this.$refs.navMobile.clientHeight;
-      const DeskNavH = this.$refs.navDesk.clientHeight;
+      const MobileNavH = this.$refs.navMobile.offsetHeight || "";
+      const DeskNavH = this.$refs.navDesk.offsetHeight || "";
       const scrollTop = e.target.documentElement.scrollTop;
 
       if (scrollTop > MobileNavH || scrollTop > DeskNavH) {
@@ -132,13 +133,9 @@ export default {
       }
     },
   },
-  created() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
+
   mounted() {
+    window.addEventListener("scroll", this.handleScroll);
     this.getCart();
 
     emitter.on("get-cart", () => {
@@ -149,23 +146,21 @@ export default {
       this.getCart();
     });
   },
+  unmounted() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
 };
 </script>
 
 <style lang="sass" scope="scoped">
 @import '@/assets/sass/global.sass'
 
-
 // -----**animation**------//
-
-
 .slide-fade-enter-active, .slide-fade-leave-active
   transition: all 1s ease
 
-
 .slide-fade-enter-from
   transform: translateX(500px)
-
 
 .slide-fade-leave-to
   transform: translateX(500px)
@@ -194,7 +189,6 @@ export default {
     border-radius: $width*3
 
 // -----**mobile**------//
-
 .ham
   position: relative
   display: block
@@ -223,14 +217,13 @@ export default {
       top: $width*3.4
 #ham
   display: none
+
 #ham:checked ~ .ham
   span
     &:nth-child(1)
       transform: rotate(45deg)
-
     &:nth-child(2)
       right: -100px
-
     &:nth-child(3)
       transform: rotate(-45deg)
 
@@ -326,14 +319,7 @@ export default {
   100%
     transform: translate(0, 0)
 
-
-
-
-
-
-
 // -----**desk**------//
-
 .nav-desk
   position: fixed
   top: 0

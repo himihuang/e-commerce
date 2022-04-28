@@ -12,7 +12,7 @@
             <h5 class="title">{{ blog.title }}</h5>
           </div>
           <div class="img-wrap">
-            <img :src="blog.image" alt="" />
+            <img :src="blog.image" alt="封面圖片" />
           </div>
           <div class="txt-area" v-html="blog.content"></div>
         </div>
@@ -40,7 +40,6 @@ export default {
           `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/article/${this.id}`
         )
         .then((res) => {
-          console.log(res);
           this.blog = res.data.article;
           this.date = new Date(this.blog.create_at).toISOString().split("T")[0];
         });

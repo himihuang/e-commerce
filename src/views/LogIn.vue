@@ -5,14 +5,14 @@
         <div class="img-block">
           <div class="txt-wrap">Be your Queen</div>
           <div class="img-wrap">
-            <img src="~@/assets/img/login-img.png" alt="" />
+            <img src="~@/assets/img/login-img.png" alt="登入圖片" />
           </div>
         </div>
       </div>
       <div class="col-12 col-sm-6 left-block bgColor-secondary">
         <Form v-slot="{ errors }" @submit="submit">
           <div class="title-wrap cus-mb-lg">
-            <img src="~@/assets/img/shine-dark.svg" alt="" />
+            <img src="~@/assets/img/shine-dark.svg" alt="光芒圖片" />
             <span class="title h1">登入</span>
           </div>
           <div class="main cus-mb-sm">
@@ -119,7 +119,6 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_URL}/admin/signin`, this.user)
         .then((res) => {
-          console.log(res);
           const { token } = res.data;
           document.cookie = `himiapi=${token}; expires=${new Date()}`;
           this.$router.push("/dashboard/Products");
@@ -138,13 +137,11 @@ export default {
 <style lang="sass" scope="scoped">
 @import '@/assets/sass/global.sass'
 
-
 .login
   font-family: 'Noto Serif TC', serif
   background-image: url('~@/assets/img/bg.png')
   background-attachment: fixed
   z-index: 1
-
 
 .right-block
   display: flex

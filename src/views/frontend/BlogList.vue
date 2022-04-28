@@ -3,10 +3,14 @@
 
   <div class="mt-navbar-lg">
     <div class="container">
-      <div class="row blog blog-item" v-for="blog in blogs" :key="blog.id">
+      <div
+        class="row blog blog-item"
+        v-for="(blog, idx) in blogs"
+        :key="blog.id"
+      >
         <div class="col-12 col-md-6">
           <div class="img-wrap">
-            <img :src="blog.image" alt="" />
+            <img :src="blog.image" :alt="`封面圖片-${idx}`" />
           </div>
         </div>
 

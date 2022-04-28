@@ -24,7 +24,7 @@
                 <div class="img"></div>
               </div>
             </div>
-            <div class="img-outer-sm" id="img-outer-sm">
+            <div class="img-outer-sm" id="img-outer-sm" ref="img_outer_sm">
               <div class="img-wrap">
                 <div class="img"></div>
               </div>
@@ -41,29 +41,50 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-    window.addEventListener("scroll", () => {
-      const pageYOffset = window.pageYOffset;
-      const imgBg = document.getElementById("img-outer-sm");
+  methods: {
+    scrollHandler() {
+      //scrollbar 高度
+      let pageYOffset = window.pageYOffset;
+      let windowHeight = window.innerHeight;
 
-      let imgBgffsetTop = imgBg.offsetTop;
-      const imgBgffsetHeight = imgBg.offsetHeight;
+      //物件本身高度
+      let box1OffsetHeight = this.$refs.img_outer_sm.offsetHeight;
 
-      const value = pageYOffset - imgBgffsetTop;
-      const percent = value / imgBgffsetHeight;
-      imgBg.style.top = 50 % -`${percent * 100}%`;
-    });
+      //將物件在網頁的高度設定為0，scrollTop - 物件在網頁的高度
+
+      let pageHeight = Math.max(
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight,
+        document.body.scrollHeight,
+        document.body.offsetHeight
+      );
+      let windowTop = pageYOffset - (windowHeight - pageHeight * 0.1);
+
+      let percent = windowTop / pageHeight;
+
+      if (windowTop > 0) {
+        const totalOffset =
+          -50 - ((percent * box1OffsetHeight) / box1OffsetHeight) * 100;
+        this.$refs.img_outer_sm.style.transform = `translateY(${totalOffset}%)`;
+      }
+    },
+  },
+  created() {
+    window.addEventListener("scroll", this.scrollHandler);
 
     setTimeout(() => {
       this.isLoading = false;
     }, 1000);
+  },
+  unmounted() {
+    window.removeEventListener("scroll", this.scrollHandler);
   },
 };
 </script>
 
 <style lang="sass" scope="scoped">
 @import '@/assets/sass/global.sass'
-
 
 .cus-blockquote
   position: relative

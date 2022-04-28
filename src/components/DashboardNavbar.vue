@@ -2,7 +2,7 @@
   <div class="nav-desk w-100">
     <div class="logo">
       <router-link to="/">
-        <img src="~@/assets/img/logo.svg" alt="" />
+        <img src="~@/assets/img/logo.svg" alt="JJ飾品" />
       </router-link>
     </div>
     <div class="main">
@@ -56,7 +56,6 @@ export default {
 
 <style lang="sass" scope="scoped">
 @import '@/assets/sass/global.sass'
-
 
 .nav-desk
   display: flex

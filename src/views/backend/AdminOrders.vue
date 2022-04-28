@@ -32,7 +32,7 @@
                 <label class="switch">
                   <input
                     type="checkbox"
-                    :checked="order.is_paid"
+                    v-model="order.is_paid"
                     @change="changePaid(order)"
                   />
                   <span class="controler"></span>
@@ -103,7 +103,7 @@ export default {
           { data: order }
         )
         .then(() => {
-          order.is_paid = !order.is_paid;
+          this.getOrders();
         });
     },
     openModal(order) {

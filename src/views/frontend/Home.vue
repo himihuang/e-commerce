@@ -8,7 +8,7 @@
         :slidesPerView="'2'"
         :spaceBetween="0"
         :effect="'coverflow'"
-        :grabCursor="true"
+        :grabCursor="false"
         :centeredSlides="true"
         :coverflowEffect="{
           rotate: 0,
@@ -41,12 +41,14 @@
         ref="mySwiper"
         v-if="products.length"
       >
-        <swiper-slide v-for="item in products" :key="item.id">
+        <swiper-slide v-for="(item, idx) in products" :key="item.id">
+          <router-link :to="`/product/${item.id}`">
+            <div class="display-2 color--white text">Shine & Beautiful</div>
+            <div class="img-wrap">
+              <img :src="item.imageUrl" :alt="`banner圖片-${idx}`" />
+            </div>
+          </router-link>
           <div class="circle"></div>
-          <div class="display-2 color--white text">Shine & Beautiful</div>
-          <div class="img-wrap">
-            <img :src="item.imageUrl" alt="" />
-          </div>
         </swiper-slide>
         <div class="arrow--prev h4">Prev ——</div>
         <div class="arrow--next h4">—— Next</div>
@@ -65,13 +67,20 @@
 
                 <div class="row row-cols-2">
                   <div
-                    class="col mb-4"
-                    v-for="image in colection.imagesUrl"
-                    :key="image"
+                    class="col mb-4 wow animate__animated animate__fadeInLeft"
+                    v-for="(item, idx) in collection"
+                    :key="item.id"
                   >
-                    <router-link :to="`/product/${colection.id}`">
+                    <router-link
+                      :to="`/product/${item.id}`"
+                      class="collection-item"
+                      v-if="idx < 2"
+                    >
                       <div class="img-wrap">
-                        <img :src="image" alt="" />
+                        <img :src="item.imageUrl" alt="商品圖片" />
+                      </div>
+                      <div class="btn btn-primary--fill">
+                        <span>查看更多</span>
                       </div>
                     </router-link>
                   </div>
@@ -82,14 +91,18 @@
           <div class="col-md-4 side">
             <div class="inner-border">
               <div class="img-wrap">
-                <img :src="colection.imageUrl" alt="" />
+                <img :src="collection[0]?.imageUrl" alt="商品圖片" />
               </div>
             </div>
             <div class="btn-wrap mt-4">
-              <button type="button" class="btn btn-text">
+              <router-link
+                :to="`/Products/${collection[0]?.category}`"
+                type="button"
+                class="btn btn-text"
+              >
                 View All
                 <div class="circle"></div>
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -102,14 +115,18 @@
           <div class="col-md-4 order-1 order-md-12 side">
             <div class="inner-border">
               <div class="img-wrap">
-                <img :src="colection2.imageUrl" alt="" />
+                <img :src="collection2[0]?.imageUrl" alt="商品圖片" />
               </div>
             </div>
             <div class="btn-wrap mt-4">
-              <button type="button" class="btn btn-text">
+              <router-link
+                :to="`/Products/${collection2[0]?.category}`"
+                type="button"
+                class="btn btn-text"
+              >
                 View All
                 <div class="circle"></div>
-              </button>
+              </router-link>
             </div>
           </div>
           <div class="col-md-8 order-12 order-md-1 main">
@@ -120,16 +137,21 @@
                 </div>
 
                 <div class="row row-cols-2">
-                  <div class="col mb-4">
-                    <router-link :to="`/product/${colection2.id}`">
-                      <template
-                        v-for="image in colection2.imagesUrl"
-                        :key="image"
-                      >
-                        <div class="img-wrap">
-                          <img :src="image" alt="" />
-                        </div>
-                      </template>
+                  <div
+                    class="col mb-4 wow animate__animated animate__fadeInRight"
+                    v-for="(item, idx) in collection2"
+                    :key="item.id"
+                  >
+                    <router-link
+                      :to="`/Products/${item.id}`"
+                      class="collection-item"
+                    >
+                      <div class="img-wrap" v-if="idx < 2">
+                        <img :src="item.imagesUrl" alt="商品圖片" />
+                      </div>
+                      <div class="btn btn-primary--fill">
+                        <span>查看更多</span>
+                      </div>
                     </router-link>
                   </div>
                 </div>
@@ -147,7 +169,7 @@
         </div>
         <div class="row row-cols-2 row-cols-lg-4">
           <div
-            class="col mb-4"
+            class="col mb-4 wow animate__animated animate__fadeInUp"
             v-for="product in newProducts"
             :key="product.id"
           >
@@ -173,7 +195,7 @@
           <div class="col-10 offset-1 col-md-4 offset-md-0">
             <router-link
               :to="`/products/${categorys[0]}`"
-              class="category-item category-item--vertical mb-3"
+              class="category-item category-item--vertical mb-3 wow animate__animated animate__fadeInUp"
             >
               <div class="inner-border"></div>
               <div class="text-wrap">
@@ -187,7 +209,7 @@
           >
             <router-link
               :to="`/products/${categorys[1]}`"
-              class="category-item category-item--landscape mb-3"
+              class="category-item category-item--landscape mb-3 wow animate__animated animate__fadeInUp"
             >
               <div class="inner-border"></div>
               <div class="text-wrap">
@@ -198,7 +220,7 @@
 
             <router-link
               :to="`/products/${categorys[2]}`"
-              class="category-item category-item--fill mb-3"
+              class="category-item category-item--fill mb-3 wow animate__animated animate__fadeInUp"
             >
               <div class="inner-border"></div>
               <div class="text-wrap">
@@ -212,7 +234,7 @@
           >
             <router-link
               :to="`/products/${categorys[3]}`"
-              class="category-item category-item--fill mb-3"
+              class="category-item category-item--fill mb-3 wow animate__animated animate__fadeInUp"
             >
               <div class="inner-border"></div>
               <div class="text-wrap">
@@ -260,8 +282,8 @@ export default {
       modules: [Navigation, Pagination, EffectCoverflow],
       swiperOptions: [],
       products: [],
-      colection: {},
-      colection2: {},
+      collection: [],
+      collection2: [],
       newProducts: [],
       categorys: [],
     };
@@ -275,10 +297,15 @@ export default {
         .then((res) => {
           this.products = res.data.products;
 
-          this.products.forEach(() => {
-            this.colection = this.products[0];
-            this.colection2 = this.products[1];
+          this.products.forEach((item) => {
+            if (item.category === "項鍊") {
+              this.collection.push(item);
+            }
+            if (item.category === "耳環") {
+              this.collection2.push(item);
+            }
           });
+
           this.newProducts = this.products.filter((item, index, array) => {
             array.reverse();
             if (index <= 3) {
@@ -296,7 +323,7 @@ export default {
     getCollections() {
       this.products.forEach(() => {
         if (this.products) {
-          this.colection = this.products[0];
+          this.collection = this.products[0];
         }
       });
     },
@@ -331,9 +358,6 @@ export default {
       background-size: cover
       background-position: center
 
-
-
-
 // -----**swiper**------//
 .home
   .swiper
@@ -359,13 +383,10 @@ export default {
   @keyframes spin
     0%
       transform: translate(-50%, -50%) scaleX(2) skewY(45deg)
-
     50%
       transform: translate(-50%, -50%) scaleX(2) skewY(50deg)
-
     100%
       transform: translate(-50%, -50%) scaleX(2) skewY(45deg)
-
 
   .swiper-slide
     background-position: center;
@@ -381,12 +402,10 @@ export default {
       img
         width: 100%
 
-
   .swiper-slide.swiper-slide-active
+    position: relative
     .img-wrap
       border-radius: 50% 50% 0 0
-
-    position: relative
     .text
       position: absolute
       top: 50%
@@ -438,7 +457,6 @@ export default {
         background-image: url('~@/assets/img/Star-1.svg')
         animation: circle 6s linear infinite
 
-
   @keyframes circle
     0%
       transform: rotateZ(0) translateX(200px) rotateZ(0) rotateY(-70deg)
@@ -474,14 +492,12 @@ export default {
     @include pad
       right: 8%
 
-
   .swiper-pagination-fraction
     bottom: 20%
     left: 0
     width: 100%
     color: $color--white
     z-index: 0
-
 
   .swiper-slide.swiper-slide-next .text,
   .swiper-slide.swiper-slide-prev .text
@@ -492,9 +508,7 @@ export default {
   .swiper-slide.swiper-slide-prev
     visibility: visible
 
-
 // -----**collection**------//
-
 .collection
   display: flex
   flex-direction: row
@@ -549,11 +563,37 @@ export default {
        border-radius: 100% 0 0 0
        z-index: 5
 
+.collection-item
+  display: block
+  position: relative
 
+  &:before
+    content: ''
+    display: block
+    position: absolute
+    width: 100%
+    height: 0%
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    background-color: rgba($color--black,.2)
+    z-index: 1
+    transition: all .5s
+  .btn
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    z-index: 2
+    opacity: 0
+    transition: all .5s
+  &:hover
+    &:before
+      height: 100%
+    .btn
+      opacity: 1
 
 // -----**category**------//
-
-
 .category
   color: $color--white
   .category-item
@@ -562,19 +602,19 @@ export default {
     .text-wrap
       @extend %absolute-center
       color: $color--white
-      
+
     .inner-border
       @extend %absolute-center
       height: 80%
       width: 80%
       border: $width/4 solid $color--white
+
     &:before
       content: ''
       display: block
       @extend %absolute-fill
       background-size: cover
       background-repeat: no-repeat
-
 
   .group-part
     display: flex
@@ -622,7 +662,6 @@ export default {
     background-image: url('~@/assets/img/category-vertival.png')
     background-size: cover
     background-repeat: no-repeat
-
 
 .category-item.category-item--fill
   &:before

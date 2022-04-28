@@ -67,7 +67,6 @@ export default {
 <style lang="sass">
 @import '@/assets/sass/global.sass'
 
-
 .page
   display: flex
   .page-item

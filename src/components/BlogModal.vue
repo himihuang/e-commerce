@@ -59,7 +59,7 @@
                   placeholder="請輸入圖片網址"
                   v-model="temp.image"
                 />
-                <img :src="temp.image" alt="" class="img-fluid" />
+                <img :src="temp.image" :alt="文章封面圖片" class="img-fluid" />
               </div>
             </div>
 
@@ -114,6 +114,7 @@
                     id="isPublic"
                     v-model="temp.isPublic"
                   />
+                  {{ temp.isPublic }}
                   <label class="form-check-label" for="isPublic">
                     是否啟用
                   </label>

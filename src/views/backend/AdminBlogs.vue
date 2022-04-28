@@ -30,7 +30,7 @@
           <tr v-for="article in blogs" :key="article.id">
             <td width="30%">
               <div class="img-wrap me-3">
-                <img :src="article.image" alt="" class="w-100" />
+                <img :src="article.image" alt="封面圖片" class="w-100" />
               </div>
               <span>{{ article.title }}</span>
             </td>
@@ -86,7 +86,10 @@ export default {
     return {
       blog: {},
       blogs: [],
-      temp: { tags: [] },
+      temp: {
+        tags: [],
+        isPublic: false,
+      },
       isNew: false,
     };
   },
@@ -115,7 +118,6 @@ export default {
     openModal(status, blog) {
       if (status == true) {
         this.isNew = true;
-        this.temp = { tags: [] };
       } else {
         this.isNew = false;
         this.$http

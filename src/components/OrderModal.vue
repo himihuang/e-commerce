@@ -42,11 +42,7 @@
                       {{ order.is_paid ? "已付款" : "未付款" }}
                     </span>
                     <label class="switch">
-                      <input
-                        type="checkbox"
-                        v-model="order.is_paid"
-                        @change="changePaid"
-                      />
+                      <input type="checkbox" v-model="order.is_paid" />
                       <span class="controler"></span>
                     </label>
                   </p>
@@ -134,9 +130,10 @@
 <script>
 import Modal from "bootstrap/js/src/modal.js";
 export default {
-  props: ["order", ""],
+  props: ["order"],
   data() {
     return {
+      is_paid: this.order.is_paid,
       modal: {},
     };
   },
@@ -146,9 +143,6 @@ export default {
     },
     closeModal() {
       this.modal.hide();
-    },
-    changePaid() {
-      this.order.is_paid = !this.order.is_paid;
     },
     updataOrder(order) {
       this.$http
@@ -173,7 +167,6 @@ export default {
 
 <style lang="sass">
 @import '@/assets/sass/global.sass'
-
 
 #productModal
   .img-wrap

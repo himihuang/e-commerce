@@ -28,7 +28,9 @@
             </div>
           </div>
 
-          <div class="btn-wrap d-flex justify-content-end cus-mb-lg cus-mt-sm">
+          <div
+            class="btn-wrap d-mb-flex d-none justify-content-end cus-mb-lg cus-mt-sm"
+          >
             <router-link to="/Carts/step2" class="btn btn-primary--fill w-30">
               <span> 確認送出 </span>
             </router-link>
@@ -56,6 +58,14 @@
                 <span class="h5">{{ total }}</span>
               </div>
             </div>
+          </div>
+
+          <div
+            class="btn-wrap d-flex justify-content-end cus-mb-lg cus-mt-sm d-mb-none"
+          >
+            <router-link to="/Carts/step2" class="btn btn-primary--fill w-30">
+              <span> 確認送出 </span>
+            </router-link>
           </div>
         </div>
       </div>
@@ -122,7 +132,6 @@ export default {
 <style lang="sass">
 @import '@/assets/sass/global.sass'
 
-
 .cart-title
   padding-top: $width*5
   padding-bottom: $width*5
@@ -132,10 +141,8 @@ export default {
     position: relative
     &:before
       content: "//  "
-
     &:after
       content: "  //"
-
 
 // -----**product-card**------//
 .cart-spep

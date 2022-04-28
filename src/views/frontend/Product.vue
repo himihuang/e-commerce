@@ -14,12 +14,12 @@
           >
             <swiper-slide>
               <div class="img-wrap">
-                <img :src="product.imageUrl" alt="" />
+                <img :src="product.imageUrl" alt="商品圖片" />
               </div>
             </swiper-slide>
-            <swiper-slide v-for="img in product.imagesUrl" :key="img">
+            <swiper-slide v-for="(img, idx) in product.imagesUrl" :key="img">
               <div class="img-wrap">
-                <img :src="img" alt="" />
+                <img :src="img" :alt="`商品圖片-${idx}`" />
               </div>
             </swiper-slide>
           </swiper>
@@ -34,12 +34,12 @@
           >
             <swiper-slide>
               <div class="img-wrap">
-                <img :src="product.imageUrl" alt="" />
+                <img :src="product.imageUrl" alt="商品圖片" />
               </div>
             </swiper-slide>
-            <swiper-slide v-for="img in product.imagesUrl" :key="img">
+            <swiper-slide v-for="(img, idx) in product.imagesUrl" :key="img">
               <div class="img-wrap">
-                <img :src="img" alt="" />
+                <img :src="img" :alt="`商品圖片-${idx}`" />
               </div>
             </swiper-slide>
           </swiper>
@@ -71,7 +71,6 @@
                 v-model="selectedNum"
                 :selected="selectedNum"
               >
-                <option value="0">0</option>
                 <template :value="num" v-for="num in 20" :key="num">
                   <option :value="num">
                     {{ num }}
@@ -137,11 +136,16 @@ export default {
       id: "",
       product: {},
       products: [],
-      selectedNum: 0,
+      selectedNum: 1,
       carts: [],
       modules: [FreeMode, Navigation, Thumbs],
       thumbsSwiper: null,
     };
+  },
+  watch: {
+    $route(to, from) {
+      this.getProduct();
+    },
   },
   methods: {
     getProducts() {
@@ -171,30 +175,37 @@ export default {
         });
     },
     updateCart(id) {
-      this.carts.forEach((item) => {
-        if (id === item.product.id) {
+      if (!this.carts === []) {
+        this.carts.forEach((item) => {
           const data = {
             product_id: item.product_id,
             qty: Number(this.selectedNum),
           };
-          this.$http
-            .put(
-              `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart/${item.id}`,
-              { data: data }
-            )
-            .then(() => {
-              emitter.emit("get-cart");
-            });
-        } else {
-          this.$http
-            .post(
-              `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`
-            )
-            .then(() => {
-              emitter.emit("get-cart");
-            });
-        }
-      });
+          if (id === item.product.id) {
+            this.$http
+              .put(
+                `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart/${item.id}`,
+                { data: data }
+              )
+              .then(() => {
+                emitter.emit("get-cart");
+              });
+          }
+        });
+      } else {
+        const data = {
+          product_id: id,
+          qty: Number(this.selectedNum),
+        };
+        this.$http
+          .post(
+            `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`,
+            { data: data }
+          )
+          .then(() => {
+            emitter.emit("get-cart");
+          });
+      }
     },
     setThumbsSwiper(swiper) {
       this.thumbsSwiper = swiper;
@@ -212,17 +223,15 @@ export default {
 <style lang="sass" scope="scoped">
 @import '@/assets/sass/global.sass'
 
-
-
 .img-wrap
   +img(100%)
   img
     width: 100%
 
-
 .cart-title
   .h2
     color: $color--white
+
 .product
   .content
     padding: $width*5

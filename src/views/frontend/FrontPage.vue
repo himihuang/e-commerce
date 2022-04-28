@@ -23,7 +23,11 @@
         <div v-if="carts.length == 0" class="cart-noData">
           <h5>目前您的購物車沒有商品</h5>
           <div class="btn-wrap">
-            <router-link to="/Products" class="btn btn-primary--fill w-100">
+            <router-link
+              to="/Products"
+              class="btn btn-primary--fill w-100"
+              @click="ShowCart = false"
+            >
               <span> 繼續購物 </span>
             </router-link>
           </div>

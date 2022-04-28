@@ -1,14 +1,14 @@
 <template>
   <div class="product-card h-100">
-    <router-link :to="`/Product/${productItem.id}`" class="">
+    <router-link :to="`/Product/${productItem.id}`">
       <div class="img-wrap">
-        <img :src="product.imageUrl" />
+        <img :src="product.imageUrl" alt="商品圖片" />
       </div>
       <div class="txt-wrap">
         <h5>{{ product.title }}</h5>
         <div class="price-wrap">
-          <del class="me-2">NT$ {{ product.origin_price }} 元</del>
-          <span>NT$ {{ product.price }} 元</span>
+          <del>NT$ {{ product.origin_price }} 元</del>
+          <h5>NT$ {{ product.price }} 元</h5>
         </div>
       </div>
     </router-link>
@@ -75,9 +75,6 @@ export default {
 
 <style lang="sass">
 @import '@/assets/sass/global.sass'
-
-
-
 
 // -----**product-card**------//
 .product-card

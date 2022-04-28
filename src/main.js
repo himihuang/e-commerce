@@ -35,6 +35,18 @@ configure({
 // 設定預設語系
 setLocale("zh_TW");
 
+//WOW.js
+import "animate.css";
+import WOW from "wow.js";
+
+new WOW({
+  boxClass: "wow",
+  animateClass: "animate__animated",
+  offset: 0,
+  mobile: true,
+  live: true,
+}).init();
+
 import App from "./App.vue";
 import router from "./router";
 
