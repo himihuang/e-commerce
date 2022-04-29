@@ -89,7 +89,8 @@ export default {
 .cus-blockquote
   position: relative
   padding-left: $width*2
-  &:before
+  z-index: 1
+  &:after
     content: ''
     display: block
     width: $width*10
@@ -99,7 +100,7 @@ export default {
     left: 0
     transform: translateY(-50%)
     background-color: $color-primary--text
-    z-index: -1
+    z-index: 0
 
 
 // -----**about**------//

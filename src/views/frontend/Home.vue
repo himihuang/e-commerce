@@ -173,7 +173,11 @@
             v-for="product in newProducts"
             :key="product.id"
           >
-            <product :product-item="product"></product>
+            <product
+              :product-item="product"
+              @toggle-favorite="toggleFavorite"
+              :favorite="favorite"
+            ></product>
           </div>
         </div>
         <div class="btn-wrap text-center mt-4">
@@ -286,9 +290,23 @@ export default {
       collection2: [],
       newProducts: [],
       categorys: [],
+      favorite:
+        JSON.parse(window.localStorage.getItem("toggle-favorite")) || [],
     };
   },
   methods: {
+    toggleFavorite(item) {
+      const favoriteId = this.favorite.findIndex((element) => element === item);
+      if (favoriteId === -1) {
+        this.favorite.push(item);
+      } else {
+        this.favorite.splice(favoriteId, 1);
+      }
+      window.localStorage.setItem(
+        "toggle-favorite",
+        JSON.stringify(this.favorite)
+      );
+    },
     getProducts() {
       this.$http
         .get(

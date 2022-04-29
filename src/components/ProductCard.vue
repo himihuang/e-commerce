@@ -1,17 +1,28 @@
 <template>
   <div class="product-card h-100">
-    <router-link :to="`/Product/${productItem.id}`">
-      <div class="img-wrap">
-        <img :src="product.imageUrl" alt="商品圖片" />
+    <div class="img-wrap">
+      <div class="heart-wrap" @click="$emit('toggle-favorite', product.id)">
+        <i class="bi bi-heart" v-if="!favorite.includes(product.id)"></i>
+        <i
+          class="bi bi-suit-heart-fill"
+          v-if="favorite.includes(product.id)"
+        ></i>
       </div>
-      <div class="txt-wrap">
-        <h5>{{ product.title }}</h5>
-        <div class="price-wrap">
-          <del>NT$ {{ product.origin_price }} 元</del>
-          <h5>NT$ {{ product.price }} 元</h5>
-        </div>
+      <img :src="product.imageUrl" alt="商品圖片" />
+      <router-link
+        :to="`/Product/${productItem.id}`"
+        class="btn btn-primary--fill w-100"
+      >
+        <span>查看更多</span>
+      </router-link>
+    </div>
+    <div class="txt-wrap">
+      <h5>{{ product.title }}</h5>
+      <div class="price-wrap">
+        <del>NT$ {{ product.origin_price }} 元</del>
+        <h5>NT$ {{ product.price }} 元</h5>
       </div>
-    </router-link>
+    </div>
 
     <div class="btn-wrap">
       <button
@@ -28,7 +39,7 @@
 <script>
 import emitter from "@/libs/emitter";
 export default {
-  props: ["productItem"],
+  props: ["productItem", "favorite"],
   data() {
     return {
       product: this.productItem,
@@ -36,6 +47,7 @@ export default {
       carts: [],
     };
   },
+
   methods: {
     getCart() {
       this.$http
@@ -83,11 +95,14 @@ export default {
   flex-direction: column
   justify-content: space-between
   color: $color--white
+  position: relative
   transition: all .5s
   &:hover
     .img-wrap
       img
         width: 120%
+      .btn
+        bottom: 0
   .txt-wrap
     padding-top: $width*2
     padding-bottom: $width*2
@@ -102,4 +117,16 @@ export default {
       transform: translate(-50%, -50%)
       width: 100%
       transition: all .5s
+    .btn-primary--fill
+        position: absolute
+        bottom: -50%
+        transition: all .5s
+  .heart-wrap
+    position: absolute
+    top: 10px
+    left: 10px
+    z-index: 2
+    i
+      color: $color--white
+      font-size: 1.5rem
 </style>

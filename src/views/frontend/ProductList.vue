@@ -59,7 +59,11 @@
               :key="product.id"
               v-show="!categoryProducts.length"
             >
-              <product :product-item="product"></product>
+              <product
+                :productItem="product"
+                @toggle-favorite="toggleFavorite"
+                :favorite="favorite"
+              ></product>
             </div>
             <div
               class="col mb-4"
@@ -67,7 +71,11 @@
               :key="product.id"
               v-show="categoryProducts.length"
             >
-              <product :product-item="product"></product>
+              <product
+                :productItem="product"
+                @toggle-favorite="toggleFavorite"
+                :favorite="favorite"
+              ></product>
             </div>
           </div>
           <div class="page-wrap cus-mt-sm cus-mb-lg">
@@ -100,6 +108,8 @@ export default {
       categoryProducts: [],
       selected: "請選擇",
       pagination: {},
+      favorite:
+        JSON.parse(window.localStorage.getItem("toggle-favorite")) || [],
     };
   },
   watch: {
@@ -107,7 +117,20 @@ export default {
       this.getCategoryItems();
     },
   },
+
   methods: {
+    toggleFavorite(item) {
+      const favoriteId = this.favorite.findIndex((element) => element === item);
+      if (favoriteId === -1) {
+        this.favorite.push(item);
+      } else {
+        this.favorite.splice(favoriteId, 1);
+      }
+      window.localStorage.setItem(
+        "toggle-favorite",
+        JSON.stringify(this.favorite)
+      );
+    },
     getProduct(page = 1) {
       this.$http
         .get(
@@ -140,7 +163,6 @@ export default {
   mounted() {
     this.getProduct();
     this.isLoading = false;
-
     this.getCategoryItems(this.$route.params.id);
   },
 };

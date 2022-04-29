@@ -62,7 +62,11 @@ const routes = [
         name: "OrderSuccess",
         component: () => import("../views/frontend/OrderSuccess.vue"),
       },
-
+      {
+        path: "/Favorite",
+        name: "Favorite",
+        component: () => import("../views/frontend/Favorite.vue"),
+      },
       {
         path: "/:pathMatch(.*)*",
         redirect: {

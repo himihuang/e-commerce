@@ -45,8 +45,11 @@
       </div>
     </transition>
     <div class="modal-bg" v-show="ShowCart"></div>
+
     <FrontNavbar />
-    <RouterView />
+    <div class="main-area">
+      <RouterView />
+    </div>
     <FrontFooter />
   </div>
 </template>
@@ -121,4 +124,10 @@ $color-primary--text: #897B62
   font-family: 'Noto Serif TC', serif
   padding-top: $width*10
   position: relative
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+
+.main-area
+  flex: 1
 </style>

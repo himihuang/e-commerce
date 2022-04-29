@@ -24,7 +24,11 @@
           </div>
           <div class="row row-cols-2 row-cols-lg-4">
             <div class="col mb-4" v-for="product in products" :key="product.id">
-              <product :product-item="product"></product>
+              <product
+                :product-item="product"
+                @toggle-favorite="toggleFavorite"
+                :favorite="favorite"
+              ></product>
             </div>
           </div>
 
@@ -92,9 +96,23 @@ export default {
       carts: [],
       cart: {},
       step: 1,
+      favorite:
+        JSON.parse(window.localStorage.getItem("toggle-favorite")) || [],
     };
   },
   methods: {
+    toggleFavorite(item) {
+      const favoriteId = this.favorite.findIndex((element) => element === item);
+      if (favoriteId === -1) {
+        this.favorite.push(item);
+      } else {
+        this.favorite.splice(favoriteId, 1);
+      }
+      window.localStorage.setItem(
+        "toggle-favorite",
+        JSON.stringify(this.favorite)
+      );
+    },
     getProduct() {
       this.$http
         .get(

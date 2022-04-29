@@ -12,6 +12,9 @@
         <!-- <router-link to="" class="nav-item">聯絡我們</router-link> -->
       </div>
       <div class="side">
+        <router-link to="/Favorite" class="nav-item">
+          <i class="bi bi-suit-heart-fill"></i>
+        </router-link>
         <router-link to="/login" class="nav-item">
           <i class="bi bi-person-fill fs-4"></i>
         </router-link>
