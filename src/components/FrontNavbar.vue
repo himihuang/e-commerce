@@ -36,7 +36,10 @@
       </router-link>
     </div>
     <div class="right-side">
-      <router-link to="" class="nav-item cart-num-wrap" @click="sideCartShow">
+      <router-link to="/Favorite" class="nav-item cart-num-wrap">
+          <i class="bi bi-suit-heart-fill"></i>
+      </router-link>
+      <router-link to="" class="nav-item cart-num-wrap pb-1" @click="sideCartShow">
         {{ cartsTotal.type }}
         <span class="cart-num" v-show="cartsTotal !== 0">{{ cartsTotal }}</span>
         <i class="fas fa-shopping-cart"></i>

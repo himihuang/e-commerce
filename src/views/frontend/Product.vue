@@ -235,6 +235,9 @@ export default {
     this.getCart();
     this.isLoading = false;
   },
+  unmounted() {
+    
+  }
 };
 </script>
 
