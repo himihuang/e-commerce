@@ -52,27 +52,5 @@ export default {
 </script>
 
 <style lang="sass">
-@import '@/assets/sass/global.sass'
 
-.progress-wrap
-  display: flex
-  justify-content: center
-  align-items: center
-  color: $color-primary--border
-  .progress-item
-    display: flex
-    justify-content: center
-    align-items: center
-    margin-bottom: 0
-    path
-      fill: $color-primary--border
-    svg
-      padding-right: $width
-      @include pad
-        width: $width*5
-    span
-        font-size: 1.5rem
-        padding-right: $width
-        @include pad
-          font-size: 1rem
 </style>

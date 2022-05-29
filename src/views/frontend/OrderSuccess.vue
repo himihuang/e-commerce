@@ -60,34 +60,4 @@ export default {
 </script>
 
 <style lang="sass">
-@import '@/assets/sass/global.sass'
-
-.success-img
-  .img-wrap
-    +img(120%)
-    background-attachment: fixed
-    background-image: url('/assets/img/decore-img.png')
-    background-repeat: no-repeat
-    background-size: 40%
-    border-radius: 500px 500px 0 0
-  .img-outer
-    width: 80%
-    position: relative
-    &:after
-      content: ''
-      display: block
-      position: absolute
-      top: -5%
-      right: -10%
-      width: 100%
-      height: 100%
-      border: $width/4 solid $color-primary--text
-      border-radius: 500px 500px 0 0
-
-.success-content
-  text-align: center
-  color: $color-primary--text
-  .title-wrap
-    img
-      width: 100%
 </style>

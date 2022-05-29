@@ -1,0 +1,123 @@
+// -----**btn**------//
+.btn-line
+  color: $color--white
+  text-align: center
+  border-top: 1px solid
+  border-bottom: 1px solid
+  padding-top: $width
+  padding-bottom: $width
+  position: relative
+  transition: all 1s ease
+  &:before
+    content: ''
+    display: block
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    height: 0
+    background-color: $color--white
+    z-index: -1
+    transition: all 1s ease
+  &:hover
+    color: $color-primary--text
+    &::before
+      height: 100%
+
+.btn-primary--fill
+  background-color: $color-primary--text
+  color: $color--white
+
+// **-----category------**//
+.category-title
+  text-align: center
+  color: $color--white
+  .title
+    margin-top: 0.5rem
+    margin-bottom: 0.5rem
+  .dec-bottom
+    transform: rotate(180deg)
+.category-item
+  color: $color--white
+  padding: $width*2
+  display: flex
+  align-items: center
+  cursor: pointer
+  position: relative
+  transition: all 1s ease
+  a
+    z-index: 3
+    color: $color--white
+    &:hover
+      color: $color--white
+  &:before
+    content: ''
+    display: block
+    position: absolute
+    left: 0
+    bottom: 0
+    height: $width/4
+    width: 0
+    background-color: $color--white
+    transition: all 1s ease
+  &:hover
+    &:before
+      width: 100%
+    .star
+      transform: rotate(30deg)
+
+.category-list
+  position: relative
+  padding: $width*3
+  &:before, &:after
+    content: ''
+    display: block
+    width: 100%
+    height: 100%
+    position: absolute
+  &:before
+    top: 5px
+    left: 5px
+    border: 1px solid $color--white
+    border-radius: 500px 500px 0 0
+  &:after
+    top: -5px
+    left: -5px
+    border: 1px solid $color--white
+    border-radius: 500px 500px 0 0
+
+// -----**form**------//
+.cus-form-select
+  border-bottom: 1px solid $color-primary--text
+  position: relative
+  &:after
+    content: ''
+    display: block
+    position: absolute
+    top: 50%
+    right: 0
+    transform: translateY(-50%)
+    font-family: "Font Awesome 5 Free"
+    font-weight: 900
+    content: "\f078"
+    z-index: -1
+  select
+    width: 100%
+    appearance: none
+    border: none
+    background-color: transparent
+    color: $color-primary--text
+
+// -----**pagination**------//
+.page-wrap
+  display: flex
+  justify-content: flex-end
+
+.page
+  .page-item
+    color: $color--white
+    path
+      fill: $color--white
+
+  .page-item.active
+    border-bottom: 1px solid $color--white

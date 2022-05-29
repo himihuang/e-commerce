@@ -65,14 +65,5 @@ export default {
 </script>
 
 <style lang="sass">
-@import '@/assets/sass/global.sass'
 
-.page
-  display: flex
-  .page-item
-    cursor: pointer
-    padding: $width
-    color: $color-primary--text
-    &.active
-      border-bottom: 1px solid $color-primary--text
 </style>

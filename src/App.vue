@@ -7,6 +7,7 @@ export default {};
 <style lang="sass">
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap');
+@import "./assets/sass/app.sass";
 
 $width: 8px
 

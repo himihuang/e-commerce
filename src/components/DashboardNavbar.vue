@@ -55,37 +55,6 @@ export default {
 </script>
 
 <style lang="sass" scope="scoped">
-@import '@/assets/sass/global.sass'
 
-.nav-desk
-  display: flex
-  justify-content: space-between
-  align-items: center
-  border-bottom: 1px solid $color--white
-  padding-left: $width*2
-  padding-right: $width*2
-  background-color: $color-primary--text
-  .logo
-    height: 40px
-    img
-      height: 100%
-  .nav-item
-    padding: $width*2 $width*3
-    color: $color--white
-    text-decoration: none
-    text-shadow: 0 $width/2 $width*2 #333
-    opacity: .5
-  .nav-item.is--active
-    opacity: 1
 
-.cart-num-wrap
-  position: relative
-  .cart-num
-    font-size: 0.75rem
-    position: absolute
-    top: $width
-    right: 0
-    padding: $width/2 $width
-    background-color: $color-primary--border
-    border-radius: $width*3
 </style>

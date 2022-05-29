@@ -221,26 +221,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '@/assets/sass/global.sass'
 
-// -----**product-card**------//
-.product-card
-  color: $color-primary--text
-  .btn-line
-    color: $color-primary--text
-    border-top: 1px solid $color-primary--text
-    border-bottom: 1px solid $color-primary--text
-    &:hover
-      color: $color--white
-      background-color: $color-primary--text
-
-// -----**cart-info**------//
-.cart-info
-  .info-item
-    display: flex
-    justify-content: space-between
-    padding-top: $width*1.5
-    padding-bottom: $width*1.5
-  .info-wrap
-    border-bottom: 1px solid $color-primary--text
 </style>

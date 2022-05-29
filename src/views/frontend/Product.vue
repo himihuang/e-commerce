@@ -242,48 +242,5 @@ export default {
 </script>
 
 <style lang="sass" scope="scoped">
-@import '@/assets/sass/global.sass'
 
-.img-wrap
-  +img(100%)
-  img
-    width: 100%
-
-.cart-title
-  .h2
-    color: $color--white
-
-.product
-  .content
-    padding: $width*5
-    background-color: rgba($color-primary--border, .6)
-    color: $color--white
-    .title-wrap
-      margin-bottom: $width*5
-    .price-wrap
-      margin-bottom: $width*5
-    .des-wrap
-      margin-bottom: $width*3
-    .content-wrap
-      margin-bottom: $width*5
-    .num-select-wrap
-      margin-bottom: $width*10
-      color: $color--white
-      .num-select
-        border-bottom: 1px solid $color--white
-        select
-          color: $color--white
-
-//--**product-thumbnail**--//
-.product-thumbnail
-  padding-top: $width*3
-  .swiper-slide
-    cursor: pointer
-    opacity: .5
-  .swiper-slide.swiper-slide-thumb-active
-    opacity: 1
-
-.product-img
-  .swiper-button-prev, .swiper-button-next
-    color: $color--white
 </style>

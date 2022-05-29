@@ -117,17 +117,5 @@ $width: 8px
 $color--white: #fff
 $color-primary--text: #897B62
 
-.frontpage
-  background:  url('~@/assets/img/bg.png')
-  box-shadow: inset 2000px 0 0 0 rgba($color-primary--text, .3)
-  background-attachment: fixed
-  font-family: 'Noto Serif TC', serif
-  padding-top: $width*10
-  position: relative
-  min-height: 100vh
-  display: flex
-  flex-direction: column
 
-.main-area
-  flex: 1
 </style>

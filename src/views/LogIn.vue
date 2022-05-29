@@ -135,52 +135,6 @@ export default {
 </script>
 
 <style lang="sass" scope="scoped">
-@import '@/assets/sass/global.sass'
 
-.login
-  font-family: 'Noto Serif TC', serif
-  background-image: url('~@/assets/img/bg.png')
-  background-attachment: fixed
-  z-index: 1
 
-.right-block
-  display: flex
-  justify-content: center
-  align-items: center
-  .img-block
-    width: 65%
-    height: auto
-    max-height: 80%
-    position: relative
-    .txt-wrap
-      position: absolute
-      top: 50%
-      left: 50%
-      transform: translate(-50%, -50%)
-      color: $color--white
-      font-size: $width*9
-      text-shadow: 0 $width/2 $width/2 $color-gray-200
-  .img-wrap
-    width: 100%
-    height: 0
-    padding-bottom: 120%
-    overflow: hidden
-    img
-      width: 100%
-
-.left-block
-  min-height: 100vh
-  display: flex
-  justify-content: center
-  align-items: center
-  form
-    width: 80%
-    .btn-block
-      text-align: center
-  .title-wrap
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
-    color: $color-primary--text
 </style>

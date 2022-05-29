@@ -166,29 +166,5 @@ export default {
 </script>
 
 <style lang="sass">
-@import '@/assets/sass/global.sass'
 
-#productModal
-  .img-wrap
-    width: 100%
-    height: 0
-    padding-bottom: 115%
-    overflow: hidden
-    img
-      width: 100%
-
-  .img-group
-    display: flex
-    flex-wrap: wrap
-
-  .thumbnail
-    width: 25%
-    padding-right: $width
-    img
-      width: 100%
-  .modal-header
-    background-color: $color-primary--text
-    color: $color--white
-  .btn-close
-    color: $color--white
 </style>

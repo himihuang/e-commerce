@@ -1,0 +1,41 @@
+// -----**product-card**------//
+.product-card
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  color: $color--white
+  position: relative
+  transition: all .5s
+  &:hover
+    .img-wrap
+      img
+        width: 120%
+      .btn
+        bottom: 0
+  .txt-wrap
+    padding-top: $width*2
+    padding-bottom: $width*2
+    text-align: center
+    color: $color--white
+  .img-wrap
+    +img(115%)
+    img
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      width: 100%
+      transition: all .5s
+    .btn-primary--fill
+        position: absolute
+        bottom: -50%
+        transition: all .5s
+  .heart-wrap
+    position: absolute
+    top: 10px
+    left: 10px
+    z-index: 2
+    i
+      color: $color--white
+      font-size: 1.5rem

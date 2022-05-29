@@ -1,0 +1,37 @@
+.cart-title
+  padding-top: $width*5
+  padding-bottom: $width*5
+  .h2
+    display: inline-block
+    color: $color-primary--text
+    position: relative
+    &:before
+      content: "//  "
+    &:after
+      content: "  //"
+
+// -----**product-card**------//
+.cart-spep
+  .product-card
+    color: $color-primary--text
+    .txt-wrap
+      color: $color-primary--text
+    .btn-line
+      color: $color-primary--text
+      border-top: 1px solid $color-primary--text
+      border-bottom: 1px solid $color-primary--text
+      &:hover
+        color: $color--white
+        &:before
+          color: $color--white
+          background-color: $color-primary--text
+
+// -----**cart-info**------//
+.cart-info
+  .info-item
+    display: flex
+    justify-content: space-between
+    padding-top: $width*1.5
+    padding-bottom: $width*1.5
+  .info-wrap
+    border-bottom: 1px solid $color-primary--text
